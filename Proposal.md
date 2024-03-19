@@ -30,8 +30,6 @@ Special Considerations
 
 ### Features
 
-List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
-
 **User SignUp/Login**: Support users to create a profile, login with email and password.
 
 **User Profile**: Overview of user account information, allowing user to set up their style preference, and retrivew the list of favorite outfits.
@@ -82,6 +80,11 @@ The app will store user profiles, clothing, AI analysis results, adn recommended
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
 
+- **GET** /api/outfits. Return all outfits in the databse.
+- **GET** /api/outfits/:occassion. Return the outfits that matches with a occassion specified by the user.
+- **POST** /api/clothes. Add a new clothes object to the database.
+- **GET** /api/clothes/:id. Get a piece of clothes matching the id.
+
 ### Auth
 
 The project will use JWT for authentication.
@@ -98,16 +101,16 @@ For the server side, use server session to verify user and control access to dat
   Create clothing uploader feature for users to upload images.
   Integrate Google Cloud Vision API for image analysis and AI matching algorithm.
 
-- March 28 (Sprint 3 - Outfit Recommendation Algorithm):
+- March 28 (Sprint 3 - Generate the prompts and OpenAI API):
 
-- March 28 (Sprint 3 - Outfit Gallery and Favorites List):
+- March 29 (Sprint 3 - Outfit Gallery and Favorites List):
   Design and develop outfit gallery page to display AI-generated outfit recommendations.
 
-- March 29 (Sprint 4 - Save and Retrieve Functionality):
+- March 30 (Sprint 4 - Save and Retrieve Functionality):
   Implement save and retrieve functionality for favorite outfits.
   Test and optimize features for user experience.
 
-- March 30 (Sprint 5 - Feedback Mechanism and Final Testing):
+- March 31 (Sprint 5 - Feedback Mechanism and Final Testing):
   Incorporate feedback mechanism for user ratings and suggestions.
   Conduct final testing, bug fixes, and UI/UX improvements.
 
