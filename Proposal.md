@@ -1,8 +1,10 @@
 # WiseWardro
 
+Your Personal AI Stylist for Effortless Outfit Coordination
+
 ## Overview
 
-A mobile app that utilized AI that suggests clothing that matches your current wardrobe. Your Personal AI Stylist for Effortless Outfit Coordination
+A mobile app that utilized GPT4 to analyze and suggests clothing that matches your current wardrobe.
 
 ### Problem
 
@@ -55,8 +57,7 @@ Special Considerations
 
 ### APIs
 
-- Google Cloud Vison API
-- Some pre-trained machine leanring or deep learning models that can perform styling recommendations.
+- OpenAI GPT-4 Vision API
 
 ### Sitemap
 
@@ -93,26 +94,19 @@ For the server side, use server session to verify user and control access to dat
 
 ## Roadmap
 
-- March 25 (Sprint 1 - User Authentication and Profile Setup):
-  Implement user signup/login functionality.
-  Develop user profile setup page with style preference inputs.
+- March 20 - March22 (Sprint 0 - Test GPT4 Turbo with Vision)
 
-- March 26-27 (Sprint 2 - Clothing Upload and AI Integration):
-  Create clothing uploader feature for users to upload images.
-  Integrate Google Cloud Vision API for image analysis and AI matching algorithm.
+- March 25 (Sprint 1 - User Authentication and Profile Setup)
 
-- March 28 (Sprint 3 - Generate the prompts and OpenAI API):
+- March 26-27 (Sprint 2 - Image Upload and GPT-4 Vision API Integration):
 
-- March 29 (Sprint 3 - Outfit Gallery and Favorites List):
-  Design and develop outfit gallery page to display AI-generated outfit recommendations.
+- March 28 (Sprint 3 - Generate the prompts to get desired results from GPT4):
 
-- March 30 (Sprint 4 - Save and Retrieve Functionality):
-  Implement save and retrieve functionality for favorite outfits.
-  Test and optimize features for user experience.
+- March 29 (Sprint 4 - Outfit Gallery and Favorites List):
 
-- March 31 (Sprint 5 - Feedback Mechanism and Final Testing):
-  Incorporate feedback mechanism for user ratings and suggestions.
-  Conduct final testing, bug fixes, and UI/UX improvements.
+- March 30 (Sprint 5 - Save and Retrieve Functionality):
+
+- March 31 (Sprint 6 - Testing):
 
 ## Nice-to-haves
 
