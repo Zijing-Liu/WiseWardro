@@ -1,0 +1,18 @@
+@use "../styles/partials/typography" as *;
+@use "../styles/partials/breakpoints" as *;
+@use "../styles/partials/variables" as *;
+
+.home {
+  &__heading {
+    @include page-header;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    @include tablet {
+      margin-top: 2rem;
+    }
+    @include desktop {
+      margin-top: 3rem;
+    }
+  }
+}

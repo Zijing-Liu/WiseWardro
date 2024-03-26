@@ -1,0 +1,12 @@
+@use "./styles/partials/typography" as *;
+@use "./styles/partials/breakpoints" as *;
+@use "./styles/partials/variables" as *;
+.app {
+  padding: 0 1rem;
+  @include tablet {
+    padding: 0 2rem;
+  }
+  @include desktop {
+    padding: 0 6rem;
+  }
+}

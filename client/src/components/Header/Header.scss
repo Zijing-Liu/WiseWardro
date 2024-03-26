@@ -1,0 +1,75 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/breakpoints" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  padding-bottom: 1rem;
+  background-color: $black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  @include tablet {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0rem 2rem;
+  }
+  @include desktop {
+    padding: 0rem 3rem;
+  }
+
+  &__logo {
+    font-family: $font;
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+    display: block;
+    height: fit-content;
+    color: $orange;
+    text-decoration: none;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @include tablet {
+      padding: 0;
+      justify-content: space-between;
+    }
+  }
+
+  &__list-item {
+    @include label-links-buttons;
+    padding: 4px 1rem;
+    font-size: 0.7rem;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+
+    @include tablet {
+      padding-left: 2.5rem;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.active {
+      border-radius: 20px;
+      background-color: #13182c;
+    }
+
+    &--link {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}

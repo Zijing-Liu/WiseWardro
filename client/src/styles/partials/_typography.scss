@@ -1,0 +1,81 @@
+@use "./variables" as *;
+@use "./breakpoints.scss" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+
+@mixin page-header {
+  font-family: $font;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  padding: 0;
+  margin: 1rem 0rem;
+  @include tablet {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+@mixin subheader {
+  font-family: $font;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 600;
+  @include tablet {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+@mixin label-links-buttons {
+  font-family: $font;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 600;
+  @include tablet {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+@mixin table-header {
+  font-family: $font;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+  @include tablet {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+  }
+}
+
+@mixin body-large {
+  font-family: $font;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 400;
+  @include tablet {
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+
+@mixin body-medium {
+  font-family: $font;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  @include tablet {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+@mixin body-small {
+  font-family: $font;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+  @include tablet {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
