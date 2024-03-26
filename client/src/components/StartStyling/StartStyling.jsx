@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AnalyzeImages.scss";
+import "./StartStyling";
 
 const AnalyzeImages = () => {
   const [selectedStyle, setSelectedStyle] = useState(null);

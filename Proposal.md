@@ -73,7 +73,7 @@ On going
 
 ### Data
 
-The app will store user profiles, clothing, AI analysis results, adn recommended outfits. The object model below describes the relationships between data objects.
+The app will store user profiles, clothing, AI analysis results, and recommended outfits. The object model below describes the relationships between data objects.
 
 ![Object Model](/ObjectModel.jpg)
 

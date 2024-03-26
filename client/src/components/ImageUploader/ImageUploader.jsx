@@ -2,7 +2,7 @@ import React from "react";
 import ImageUploading from "react-images-uploading";
 import "./ImageUploader.scss";
 import closeIcon from "../../asset/close.svg";
-import AnalyzeImages from "../AnalyzeImages/AnalyzeImages";
+import StartStyling from "../StartStyling/StartStyling";
 const ImageUploader = () => {
   const [images, setImages] = React.useState([]);
   const maxNumber = 10;
@@ -68,7 +68,7 @@ const ImageUploader = () => {
           </div>
         )}
       </ImageUploading>
-      <AnalyzeImages />
+      <StartStyling />
     </div>
   );
 };
