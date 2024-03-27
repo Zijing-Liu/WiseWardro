@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Home.scss";
-import ImageUploader from "../components/ImageUploader/ImageUploader";
+import ImageUploader from "../../components/ImageUploader/ImageUploader";
 const Home = () => {
   return (
     <div>

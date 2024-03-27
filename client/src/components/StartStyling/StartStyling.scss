@@ -27,6 +27,7 @@
     }
 
     &--selected {
+      @extend .style__option;
       background-color: $oliver-green;
       color: white;
     }
