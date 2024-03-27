@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import "./StartStyling";
+import "./StartStyling.scss";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const AnalyzeImages = () => {
   const base_url = process.env.REACT_APP_BASE_URL;
-  console.log(base_url);
-  // const navigate = useNavigate();
+  console.log("baseUrl is", base_url);
+  const navigate = useNavigate();
   const [selectedStyle, setSelectedStyle] = useState(null);
   const styles = [
     "Streetwear",
@@ -27,21 +28,21 @@ const AnalyzeImages = () => {
     setSelectedStyle(style);
   };
 
-  // const handleClick = async () => {
-  //   if (!selectedStyle) {
-  //     alert("Please selected a style for your outfit");
-  //   }
-  //   try {
-  //     // send styling options to api call
-  //     const response = await axios.post(`${base_url}/clothes`, {
-  //       style: selectedStyle,
-  //     });
-  //     console.log(response);
-  //     // navigate("/recommendations");
-  //   } catch (error) {
-  //     console.log("error message ", error);
-  //   }
-  // };
+  const handleClick = async () => {
+    if (!selectedStyle) {
+      alert("Please selected a style for your outfit");
+    }
+    try {
+      // send styling options to api call
+      const response = await axios.post(`${base_url}/clothes`, {
+        style: selectedStyle,
+      });
+      console.log(response);
+      navigate("/recommendations");
+    } catch (error) {
+      console.log("error message ", error);
+    }
+  };
 
   return (
     <div className="style">
@@ -59,7 +60,9 @@ const AnalyzeImages = () => {
         ))}
       </div>
 
-      <button className="style__btn">Start Styling</button>
+      <button className="style__btn" onClick={handleClick}>
+        Start Styling
+      </button>
     </div>
   );
 };
