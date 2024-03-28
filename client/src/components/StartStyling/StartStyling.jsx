@@ -3,7 +3,7 @@ import "./StartStyling.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AnalyzeImages = () => {
+const AnalyzeImages = ({ uploadedeImages }) => {
   const base_url = process.env.REACT_APP_BASE_URL;
   console.log("baseUrl is", base_url);
   const navigate = useNavigate();
@@ -34,9 +34,16 @@ const AnalyzeImages = () => {
     }
     try {
       // send styling options to api call
+      // Create a Blob from the JSON string
+      const blob = new Blob([JSON.stringify(uploadedeImages)], {
+        type: "application/json",
+      });
+      console.log("request body size is", blob.size);
       const response = await axios.post(`${base_url}/clothes`, {
         style: selectedStyle,
+        images: uploadedeImages,
       });
+
       console.log(response);
       navigate("/recommendations");
     } catch (error) {

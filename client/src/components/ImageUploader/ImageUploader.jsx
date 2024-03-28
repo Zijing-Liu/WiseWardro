@@ -6,7 +6,7 @@ import StartStyling from "../StartStyling/StartStyling";
 const ImageUploader = () => {
   const [images, setImages] = React.useState([]);
   const maxNumber = 10;
-
+  console.log(images);
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
   };
@@ -59,7 +59,8 @@ const ImageUploader = () => {
               </div>
             ) : (
               <div className="image-uploader__message">
-                Drag & drop images here or click to select images
+                Drag & drop images here or click to select images. Each image
+                should be under 20kb in size.
               </div>
             )}
             <div className="image-uploader__counter">
@@ -68,7 +69,7 @@ const ImageUploader = () => {
           </div>
         )}
       </ImageUploading>
-      <StartStyling />
+      <StartStyling uploadedeImages={images} />
     </div>
   );
 };
