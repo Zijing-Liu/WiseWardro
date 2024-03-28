@@ -1,13 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const { formDataValidator } = require("../Middlewares/formDataValidator");
 const processImages = (req, res, next) => {
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send("No files were uploaded.");
-  }
-  if (!req.body.style) {
-    return res.status(400).send("No style is selected");
-  }
-
   const messages = [];
   const errorOccurred = Object.keys(req.files).some((key) => {
     const file = req.files[key];
