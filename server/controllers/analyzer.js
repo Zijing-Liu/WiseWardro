@@ -1,6 +1,5 @@
-// import OpenAI from "openai";
-// Import the OpenAI library
-const OpenAIApi = require("openai");
+const OpenAIApi = require("openai"); // Import the OpenAI library
+
 require("dotenv").config({ path: `${__dirname}/../.env` });
 // Initialize the OpenAI API client
 const openai = new OpenAIApi({ apiKey: process.env.OPENAI_API_KEY });
@@ -61,5 +60,3 @@ const analyzer = async (req, res, next) => {
 };
 
 module.exports = { analyzer };
-
-wo;
