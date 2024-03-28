@@ -5,3 +5,7 @@ node_modules/
 images/
 scrape.py
 uploads/
+
+*.jpg
+*.png
+*jpeg
