@@ -3,10 +3,11 @@ import ImageUploading from "react-images-uploading";
 import "./ImageUploader.scss";
 import closeIcon from "../../asset/close.svg";
 import StartStyling from "../StartStyling/StartStyling";
+
 const ImageUploader = () => {
   const [images, setImages] = React.useState([]);
-  const maxNumber = 10;
-  console.log(images);
+  const maxNumber = 10; // max # of images a user can upload per time
+
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
   };
@@ -69,7 +70,7 @@ const ImageUploader = () => {
           </div>
         )}
       </ImageUploading>
-      <StartStyling uploadedeImages={images} />
+      <StartStyling images={images} />
     </div>
   );
 };

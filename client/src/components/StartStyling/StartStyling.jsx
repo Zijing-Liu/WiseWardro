@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./StartStyling.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AnalyzeImages = ({ uploadedeImages }) => {
+const AnalyzeImages = ({ images }) => {
   const base_url = process.env.REACT_APP_BASE_URL;
-  console.log("baseUrl is", base_url);
   const navigate = useNavigate();
-  const [selectedStyle, setSelectedStyle] = useState(null);
+
+  // update the formData when the images or selectedStyle changes
+  const [selectedStyle, setSelectedStyle] = useState("");
+  const [formData, setFormData] = React.useState(null);
+  // const [isFormDataReady, setIsFormDataReady] = useState(false); // New state to track readiness
+
+  const handleStyleClick = (style) => {
+    setSelectedStyle(style);
+  };
+
   const styles = [
     "Streetwear",
     "Boho-chic",
@@ -24,28 +32,31 @@ const AnalyzeImages = ({ uploadedeImages }) => {
     "Gothic Fashion",
   ];
 
-  const handleStyleClick = (style) => {
-    setSelectedStyle(style);
-  };
-
   const handleClick = async () => {
     if (!selectedStyle) {
       alert("Please selected a style for your outfit");
+      return;
     }
-    try {
-      // send styling options to api call
-      // Create a Blob from the JSON string
-      const blob = new Blob([JSON.stringify(uploadedeImages)], {
-        type: "application/json",
-      });
-      console.log("request body size is", blob.size);
-      const response = await axios.post(`${base_url}/clothes`, {
-        style: selectedStyle,
-        images: uploadedeImages,
-      });
+    if (!images || images.length === 0) {
+      alert("Please upload images");
+      return;
+    }
+    // construct the formdata to include image files and the selected style
+    const formData = new FormData();
+    images.forEach((image, index) => {
+      formData.append(`image${index}`, image.file);
+    });
+    formData.append("style", selectedStyle);
+    setFormData(formData);
+    // Log FormData contents
 
-      console.log(response);
-      navigate("/recommendations");
+    try {
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+      const response = await axios.post(`${base_url}/clothes`, formData);
+      console.log("File uploaded successfully:", response.data);
+      // navigate("/recommendations");
     } catch (error) {
       console.log("error message ", error);
     }
