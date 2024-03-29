@@ -1,0 +1,4 @@
+{
+  "editor.wordWrap": "on", // or "bounded"
+  "editor.wordWrapColumn": 80 // or any number that suits your preference
+}

@@ -6,6 +6,6 @@ images/
 scrape.py
 uploads/
 
-*.jpg
-*.png
-*jpeg
+# *.jpg
+# *.png
+# *jpeg
