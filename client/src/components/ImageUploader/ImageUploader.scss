@@ -28,7 +28,15 @@
       margin: 3rem 0;
     }
   }
-
+  &__message {
+    margin: 1rem;
+    @include tablet {
+      margin: 1.5rem;
+    }
+    @include desktop {
+      margin: 2rem;
+    }
+  }
   &__remove-btn {
     position: absolute;
     top: 4px;

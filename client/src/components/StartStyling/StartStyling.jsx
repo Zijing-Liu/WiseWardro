@@ -3,14 +3,13 @@ import "./StartStyling.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AnalyzeImages = ({ images }) => {
+const AnalyzeImages = ({ images, errors, setErrors }) => {
   const base_url = process.env.REACT_APP_BASE_URL;
   const navigate = useNavigate();
-
+  const [choises, setChoices] = useState([]);
   // update the formData when the images or selectedStyle changes
   const [selectedStyle, setSelectedStyle] = useState("");
-  const [formData, setFormData] = React.useState(null);
-  // const [isFormDataReady, setIsFormDataReady] = useState(false); // New state to track readiness
+  const [formData, setFormData] = React.useState(new FormData());
 
   const handleStyleClick = (style) => {
     setSelectedStyle(style);
@@ -33,14 +32,18 @@ const AnalyzeImages = ({ images }) => {
   ];
 
   const handleClick = async () => {
+    const errors = {};
     if (!selectedStyle) {
-      alert("Please selected a style for your outfit");
+      errors.style = "Please selected a style for your outfit";
+    }
+    if (!images || images.length < 3) {
+      errors.images = "Please upload at least 3 images";
+    }
+    if (errors.images || images.style) {
+      setErrors(errors);
       return;
     }
-    if (!images || images.length === 0) {
-      alert("Please upload images");
-      return;
-    }
+
     // construct the formdata to include image files and the selected style
     const formData = new FormData();
     images.forEach((image, index) => {
@@ -56,7 +59,7 @@ const AnalyzeImages = ({ images }) => {
       }
       const response = await axios.post(`${base_url}/clothes`, formData);
       console.log("File uploaded successfully:", response.data);
-      // navigate("/recommendations");
+      navigate("/recommendations");
     } catch (error) {
       console.log("error message ", error);
     }
@@ -76,6 +79,7 @@ const AnalyzeImages = ({ images }) => {
             {style}
           </button>
         ))}
+        {errors.style && <p className="form__input--error">{errors.style}</p>}
       </div>
 
       <button className="style__btn" onClick={handleClick}>

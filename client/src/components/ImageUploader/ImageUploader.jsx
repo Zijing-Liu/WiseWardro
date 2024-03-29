@@ -1,11 +1,13 @@
-import React from "react";
+import { React, useState } from "react";
 import ImageUploading from "react-images-uploading";
 import "./ImageUploader.scss";
 import closeIcon from "../../asset/close.svg";
 import StartStyling from "../StartStyling/StartStyling";
 
 const ImageUploader = () => {
-  const [images, setImages] = React.useState([]);
+  const [images, setImages] = useState([]);
+  const [errors, setErrors] = useState({});
+
   const maxNumber = 10; // max # of images a user can upload per time
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -60,8 +62,9 @@ const ImageUploader = () => {
               </div>
             ) : (
               <div className="image-uploader__message">
-                Drag & drop images here or click to select images. Each image
-                should be under 20kb in size.
+                Drag & drop images here or click to select images. Please upload
+                at 3 images to have a recommended outif. Total iamge file size
+                should be under 1MB.
               </div>
             )}
             <div className="image-uploader__counter">
@@ -70,7 +73,10 @@ const ImageUploader = () => {
           </div>
         )}
       </ImageUploading>
-      <StartStyling images={images} />
+      {errors.images && (
+        <p className="image-uploader--error">{errors.images}</p>
+      )}
+      <StartStyling images={images} errors={errors} setErrors={setErrors} />
     </div>
   );
 };
