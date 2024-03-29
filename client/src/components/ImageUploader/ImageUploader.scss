@@ -24,9 +24,6 @@
     @include tablet {
       margin: 2rem 0;
     }
-    @include desktop {
-      margin: 3rem 0;
-    }
   }
   &__message {
     margin: 1rem;

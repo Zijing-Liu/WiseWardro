@@ -79,12 +79,15 @@ const AnalyzeImages = ({ images, errors, setErrors }) => {
             {style}
           </button>
         ))}
-        {errors.style && <p className="form__input--error">{errors.style}</p>}
       </div>
 
       <button className="style__btn" onClick={handleClick}>
         Start Styling
       </button>
+      <div className="" style__errors>
+        {errors.images && <p className="error">{errors.images}</p>}
+        {errors.style && <p className="error">{errors.style}</p>}
+      </div>
     </div>
   );
 };

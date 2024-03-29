@@ -62,9 +62,9 @@ const ImageUploader = () => {
               </div>
             ) : (
               <div className="image-uploader__message">
-                Drag & drop images here or click to select images. Please upload
-                at 3 images to have a recommended outif. Total iamge file size
-                should be under 1MB.
+                <p>Drag & drop images here or click to select images.</p>
+                <p>Please upload at 3 images to have a recommended outif.</p>
+                <p> Total iamge file size should be under 1MB.</p>
               </div>
             )}
             <div className="image-uploader__counter">
@@ -73,9 +73,7 @@ const ImageUploader = () => {
           </div>
         )}
       </ImageUploading>
-      {errors.images && (
-        <p className="image-uploader--error">{errors.images}</p>
-      )}
+
       <StartStyling images={images} errors={errors} setErrors={setErrors} />
     </div>
   );

@@ -1,0 +1,13 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/breakpoints" as *;
+@use "../../styles/partials/variables" as *;
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  color: $cloud;
+  @include body-small;
+}

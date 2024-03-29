@@ -1,10 +1,12 @@
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Recommendations from "./pages/Recommendations/Recommendations";
 import MyOutfits from "./pages/MyOutfits/MyOutfits";
 import MyClothes from "./pages/MyClothes/MyClothes";
+
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +19,7 @@ function App() {
           <Route path="/my-clothes" element={<MyClothes />} />
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }

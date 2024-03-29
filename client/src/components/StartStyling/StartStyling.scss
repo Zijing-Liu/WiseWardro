@@ -4,11 +4,12 @@
 .style {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-
+  align-items: center;
   &__options {
+    margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
+
     gap: 10px;
     @include tablet {
       width: 60vw;
@@ -33,19 +34,23 @@
     }
   }
 
-  .style__btn {
-    margin-top: 20px;
+  &__btn {
+    @include label-links-buttons;
+    font-weight: 600;
+    margin: 20px 0px;
     padding: 10px 20px;
+    width: 200px;
     background-color: $orange;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    position: relative;
-    margin: auto;
     &:hover {
       background-color: $light-grey;
       color: $orange;
     }
+  }
+  &__errors {
+    margin-bottom: 1rem;
   }
 }
