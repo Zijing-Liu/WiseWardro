@@ -1,5 +1,4 @@
 export const getJson = (str) => {
-  // Regular expression to match JSON objects enclosed within square brackets
   // Regular expression to extract the JSON array of objects
   const regex = /\[\{.*?\}\]/gs;
   const matches = str.match(regex);
@@ -12,6 +11,3 @@ export const getJson = (str) => {
     return null;
   }
 };
-
-// Example usage:
-// getJson(str);

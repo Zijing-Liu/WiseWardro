@@ -3,14 +3,10 @@ import "./StartStyling.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { storeImages } from "../../utils/indexDB";
-const StartStyling = ({ setResponse, images, errors, setErrors }) => {
+const StartStyling = ({ response, setResponse, images, errors, setErrors }) => {
   const base_url = process.env.REACT_APP_BASE_URL;
-  console.log(base_url);
   const navigate = useNavigate();
-  // update the formData when the images or selectedStyle changes
   const [selectedStyle, setSelectedStyle] = useState("");
-  const [formData, setFormData] = React.useState(new FormData());
-
   const handleStyleClick = (style) => {
     setSelectedStyle(style);
   };
@@ -30,6 +26,12 @@ const StartStyling = ({ setResponse, images, errors, setErrors }) => {
     "Punk Fashion",
     "Gothic Fashion",
   ];
+
+  useEffect(() => {
+    if (response.length > 0) {
+      navigate("/recommendations");
+    }
+  }, [response]); // re-render the page when the response is upadated
 
   const handleClick = async () => {
     const errors = {};
@@ -52,21 +54,16 @@ const StartStyling = ({ setResponse, images, errors, setErrors }) => {
       formDataKeys.push(`image${index}`);
     });
     formData.append("style", selectedStyle);
-    setFormData(formData);
 
     try {
-      // for (let [key, value] of formData.entries()) {
-      //   console.log(`${key}:`, value);
-      // }
       console.log(`Sending request to ${base_url}/clothes`);
-      await storeImages(images, formDataKeys); // Store images in IndexedDB
-      const response = await axios.post(`${base_url}/clothes`, formData);
-      console.log("Response from GPT-4:", response.data);
-      setResponse(response.data);
-      // navigate("/recommendations");
+      await storeImages(images, formDataKeys); // store images in IndexedDB
+      const apiResponse = await axios.post(`${base_url}/clothes`, formData); // send formData to api
+      console.log("Response from GPT-4:", apiResponse.data);
+      setResponse(apiResponse.data);
     } catch (error) {
       console.error("Error in sending request:", error);
-      setErrors({ api: "Error processing request. Please try again." });
+      setErrors({ api: `${error}. Please try again.` });
     }
   };
 
@@ -92,6 +89,7 @@ const StartStyling = ({ setResponse, images, errors, setErrors }) => {
       <div className="" style__errors>
         {errors.images && <p className="error">{errors.images}</p>}
         {errors.style && <p className="error">{errors.style}</p>}
+        {errors.api && <p className="error">{errors.api}</p>}
       </div>
     </div>
   );

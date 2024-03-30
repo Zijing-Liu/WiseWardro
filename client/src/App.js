@@ -8,7 +8,8 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 function App() {
-  const [response, setResponse] = useState(null);
+  // the message string obtained from gpt4 api, a global state shared between the recommendation page and the homepage
+  const [response, setResponse] = useState("");
   return (
     <BrowserRouter>
       <Header />
