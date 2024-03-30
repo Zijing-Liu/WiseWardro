@@ -3,7 +3,7 @@ import { getImages } from "../../utils/indexDB";
 import "./Recommendations.scss";
 import { getJson } from "../../utils/getJson";
 import { useNavigate } from "react-router-dom";
-const Recommendations = ({ selectStyle, response }) => {
+const Recommendations = ({ style, response }) => {
   const navigate = useNavigate();
   // console.log("recommendation page: ", typeof response, response);
   const outfits = getJson(response); // Parse JSON string using getJson function
@@ -41,9 +41,9 @@ const Recommendations = ({ selectStyle, response }) => {
     );
   } else {
     return (
-      <div>
+      <div className="recommendations">
         <h1 className="outfit-heading">
-          Here are some outfit ideas to look ${selectStyle}
+          Here are some outfit ideas to look {style.toLowerCase()}:
         </h1>
         <div className="outfit-gallery">
           {outfits.map((outfit) => (

@@ -9,7 +9,6 @@
     margin: 20px 0;
     display: flex;
     flex-wrap: wrap;
-
     gap: 10px;
     @include tablet {
       width: 60vw;
@@ -18,19 +17,22 @@
 
   &__option {
     padding: 8px 16px;
-    border: 1px solid #ccc;
+    border: 0px;
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.1);
     background-color: $white;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
+    transition: background-color 0.2s, border-color 0.2s;
     border-radius: 8px;
+    color: $black;
     &:hover {
-      background-color: #e7e7e7;
+      background-color: $light-grey;
+      color: $black;
     }
 
     &--selected {
       @extend .style__option;
-      background-color: $cloud;
-      color: $black;
+      background-color: $black;
+      color: $white;
     }
   }
 
@@ -41,17 +43,24 @@
 
     padding: 10px 20px;
     width: 200px;
-    background-color: $orange;
+    background-color: $black;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 8px;
     &:hover {
       background-color: $light-grey;
-      color: $orange;
+      color: $cloud;
+      color: $black;
     }
   }
   &__errors {
     margin-bottom: 1rem;
+  }
+  &__loading {
+    margin-top: 1rem;
+    @include tablet {
+      margin-top: 2rem;
+    }
   }
 }

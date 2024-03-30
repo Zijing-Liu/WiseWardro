@@ -7,6 +7,7 @@ import MyClothes from "./pages/MyClothes/MyClothes";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
+
 function App() {
   // the message string obtained from gpt4 api, a global state shared between the recommendation page and the homepage
   const [response, setResponse] = useState("");

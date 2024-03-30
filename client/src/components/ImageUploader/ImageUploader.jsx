@@ -3,7 +3,7 @@ import ImageUploading from "react-images-uploading";
 import "./ImageUploader.scss";
 import closeIcon from "../../asset/close.svg";
 import StartStyling from "../StartStyling/StartStyling";
-
+import uploadIcon from "../../asset/upload.png";
 const ImageUploader = ({ images, setImages }) => {
   const maxNumber = 10; // max # of images a user can upload per time
 
@@ -58,10 +58,17 @@ const ImageUploader = ({ images, setImages }) => {
                 ))}
               </div>
             ) : (
-              <div className="image-uploader__message">
-                <p>Drag & drop images here or click to select images.</p>
-                <p>Please upload at 3 images to have a recommended outif.</p>
-                <p> Total iamge file size should be under 1MB.</p>
+              <div className="image-uploader__content">
+                <img
+                  className="image-uploader__upload-icon"
+                  src={uploadIcon}
+                  alt="Upload icon"
+                />
+                <div className="image-uploader__messages">
+                  Drag & drop images here or click to select images. <br></br>
+                  Please upload at 3 images to have a recommended outif.{" "}
+                  <br></br>Total iamge file size should be under 1MB.
+                </div>
               </div>
             )}
             <div className="image-uploader__counter">

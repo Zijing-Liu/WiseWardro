@@ -1,7 +1,12 @@
 @use "../../styles/partials/typography" as *;
 @use "../../styles/partials/breakpoints" as *;
 @use "../../styles/partials/variables" as *;
-
+.recommendations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .outfit-gallery {
   padding-top: 1rem;
   display: flex;
@@ -16,14 +21,17 @@
   @include page-header;
 }
 .outfit-card {
-  //   border: 1px solid #ccc;
   border-radius: 1rem;
   box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  @include tablet {
+    padding: 2rem;
+  }
 
-  padding: 10px;
   &__images {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     gap: 10px;
     width: 40%;
   }
