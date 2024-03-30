@@ -24,8 +24,6 @@ const saveImages = (req, res, next) => {
 
   if (errorOccurred) {
     res.status(500).send(messages.join("\n"));
-  } else {
-    res.status(200).send(messages.join("\n"));
   }
   next();
 };

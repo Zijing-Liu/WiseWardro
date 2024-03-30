@@ -11,5 +11,4 @@ router.get("/", (req, res) => {
   res.send("welcome");
 });
 router.post("/", formDataValidator, saveImages, analyzer);
-//router.post("/", formDataValidator, saveImages);
 module.exports = router;

@@ -11,9 +11,8 @@ async function convertImageToBase64(filePath) {
       .toBuffer();
 
     // Convert to Base64
-    const base64 = buffer.toString("base64");
-
-    return `data:image/jpeg;base64,${base64}`;
+    const base64 = `data:image/jpg;base64,${buffer.toString("base64")}`;
+    return base64;
   } catch (error) {
     console.error("Error processing image:", error);
   }
