@@ -4,10 +4,7 @@ import "./ImageUploader.scss";
 import closeIcon from "../../asset/close.svg";
 import StartStyling from "../StartStyling/StartStyling";
 
-const ImageUploader = ({ response, setResponse }) => {
-  const [images, setImages] = useState([]);
-  const [errors, setErrors] = useState({});
-
+const ImageUploader = ({ images, setImages }) => {
   const maxNumber = 10; // max # of images a user can upload per time
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -73,14 +70,6 @@ const ImageUploader = ({ response, setResponse }) => {
           </div>
         )}
       </ImageUploading>
-
-      <StartStyling
-        response={response}
-        setResponse={setResponse}
-        images={images}
-        errors={errors}
-        setErrors={setErrors}
-      />
     </div>
   );
 };
