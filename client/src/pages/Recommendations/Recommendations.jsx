@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getImages } from "../../utils/indexDB";
 import "./Recommendations.scss";
 import { getJson } from "../../utils/getJson";
+import { useNavigate } from "react-router-dom";
 const Recommendations = ({ selectStyle, response }) => {
-  console.log("recommendation page: ", typeof response, response);
+  const navigate = useNavigate();
+  // console.log("recommendation page: ", typeof response, response);
   const outfits = getJson(response); // Parse JSON string using getJson function
   const [images, setImages] = useState([]);
   console.log("logging the gpt response on recommendation", outfits);
@@ -32,8 +34,9 @@ const Recommendations = ({ selectStyle, response }) => {
     return <div className="outfit__loading">Loading...</div>;
   } else if (response.length > 0 && !outfits) {
     return (
-      <div>
+      <div className="outfit-heading">
         <h1>Opps, GPT4 says {response}</h1>
+        <button onClick={() => navigate(-1)}>Try Agian</button>
       </div>
     );
   } else {

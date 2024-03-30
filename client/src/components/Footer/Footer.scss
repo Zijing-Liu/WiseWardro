@@ -3,11 +3,11 @@
 @use "../../styles/partials/variables" as *;
 
 .footer {
-  position: relative;
-  bottom: 0;
   width: 100%;
   text-align: center;
-  padding: 10px 0;
   color: $cloud;
   @include body-small;
+  margin: 1rem 0;
+  bottom: 1rem;
+  padding: 0;
 }

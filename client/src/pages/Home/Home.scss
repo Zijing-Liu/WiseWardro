@@ -9,7 +9,7 @@
     margin-top: 1rem;
     margin-bottom: 0;
     @include tablet {
-      margin-top: 2rem;
+      margin-top: 2rem, 0;
     }
     @include desktop {
       margin-top: 3rem;

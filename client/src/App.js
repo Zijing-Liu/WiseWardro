@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import "./App.scss";
 import Recommendations from "./pages/Recommendations/Recommendations";
@@ -13,29 +13,31 @@ function App() {
   const [style, setStyle] = useState("");
   return (
     <BrowserRouter>
-      <Header />
       <div className="app">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                response={response}
-                setResponse={setResponse}
-                style={style}
-                setStyle={setStyle}
-              />
-            }
-          />
-          <Route
-            path="/recommendations"
-            element={<Recommendations response={response} style={style} />}
-          />
-          <Route path="/my-outftis" element={<MyOutfits />} />
-          <Route path="/my-clothes" element={<MyClothes />} />
-        </Routes>
+        <Header />
+        <main className="app__main">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  response={response}
+                  setResponse={setResponse}
+                  style={style}
+                  setStyle={setStyle}
+                />
+              }
+            />
+            <Route
+              path="/recommendations"
+              element={<Recommendations response={response} style={style} />}
+            />
+            <Route path="/my-outftis" element={<MyOutfits />} />
+            <Route path="/my-clothes" element={<MyClothes />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
-      <Footer />
     </BrowserRouter>
   );
 }

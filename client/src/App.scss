@@ -2,12 +2,18 @@
 @use "./styles/partials/breakpoints" as *;
 @use "./styles/partials/variables" as *;
 .app {
-  padding: 0 1rem;
-  @include tablet {
-    padding: 0 2rem;
-  }
-  @include desktop {
-    padding: 0 6rem;
+  // width: 100vw;
+  // height: 100vh;
+  box-sizing: border-box;
+  &__main {
+    padding: 0 1rem;
+    min-height: 75vh; // Default minimum height when there is no content
+    @include tablet {
+      padding: 0 2rem;
+    }
+    @include desktop {
+      padding: 0 6rem;
+    }
   }
 }
 .error {
