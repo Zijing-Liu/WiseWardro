@@ -28,8 +28,14 @@ const Recommendations = ({ selectStyle, response }) => {
     return image ? image.url : "";
   };
 
-  if (images.length === 0 || !response || !outfits || outfits.length === 0) {
+  if (images.length === 0 || !response || response.length === 0) {
     return <div className="outfit__loading">Loading...</div>;
+  } else if (response.length > 0 && !outfits) {
+    return (
+      <div>
+        <h1>Opps, GPT4 says {response}</h1>
+      </div>
+    );
   } else {
     return (
       <div>
