@@ -22,7 +22,7 @@ const analyzer = async (req, res) => {
       considerations: "",
     },
   ]);
-  const textContent = `I have a collection of images, each showing a different piece of clothing. I need to assemble various outfits for a 25 to 40-year-old female in the ${selectedstyle} style. Using these images, can you help me compile outfits where each type of clothing item (like a jacket) appears only once per outfit? 
+  const textContent = `I have a collection of images encoded in base64 ${imageUrls} , each showing a different piece of clothing. I need to assemble various outfits for a 25 to 40-year-old female in the ${selectedstyle} style. Using these images, can you help me compile 1 or more outfits based on the total number of images provided where each type of clothing item (like a jacket) appears only once per outfit? 
 
   For each outfit, please provide:
   - An automatically generated outfit identifier (outfit_id).
