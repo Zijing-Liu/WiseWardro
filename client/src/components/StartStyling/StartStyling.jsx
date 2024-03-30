@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./StartStyling.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const AnalyzeImages = ({ images, errors, setErrors }) => {
+import { storeImages } from "../../utils/indexDB";
+const StartStyling = ({ setResponse, images, errors, setErrors }) => {
   const base_url = process.env.REACT_APP_BASE_URL;
+  console.log(base_url);
   const navigate = useNavigate();
-  const [choises, setChoices] = useState([]);
   // update the formData when the images or selectedStyle changes
   const [selectedStyle, setSelectedStyle] = useState("");
   const [formData, setFormData] = React.useState(new FormData());
@@ -46,22 +46,27 @@ const AnalyzeImages = ({ images, errors, setErrors }) => {
 
     // construct the formdata to include image files and the selected style
     const formData = new FormData();
+    const formDataKeys = [];
     images.forEach((image, index) => {
       formData.append(`image${index}`, image.file);
+      formDataKeys.push(`image${index}`);
     });
     formData.append("style", selectedStyle);
     setFormData(formData);
-    // Log FormData contents
 
     try {
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(`${key}:`, value);
+      // }
+      console.log(`Sending request to ${base_url}/clothes`);
+      await storeImages(images, formDataKeys); // Store images in IndexedDB
       const response = await axios.post(`${base_url}/clothes`, formData);
-      console.log("File uploaded successfully:", response.data);
-      navigate("/recommendations");
+      console.log("Response from GPT-4:", response.data);
+      setResponse(response.data);
+      // navigate("/recommendations");
     } catch (error) {
-      console.log("error message ", error);
+      console.error("Error in sending request:", error);
+      setErrors({ api: "Error processing request. Please try again." });
     }
   };
 
@@ -92,4 +97,4 @@ const AnalyzeImages = ({ images, errors, setErrors }) => {
   );
 };
 
-export default AnalyzeImages;
+export default StartStyling;

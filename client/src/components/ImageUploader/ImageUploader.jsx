@@ -4,7 +4,7 @@ import "./ImageUploader.scss";
 import closeIcon from "../../asset/close.svg";
 import StartStyling from "../StartStyling/StartStyling";
 
-const ImageUploader = () => {
+const ImageUploader = ({ setResponse }) => {
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
 
@@ -74,7 +74,12 @@ const ImageUploader = () => {
         )}
       </ImageUploading>
 
-      <StartStyling images={images} errors={errors} setErrors={setErrors} />
+      <StartStyling
+        setResponse={setResponse}
+        images={images}
+        errors={errors}
+        setErrors={setErrors}
+      />
     </div>
   );
 };

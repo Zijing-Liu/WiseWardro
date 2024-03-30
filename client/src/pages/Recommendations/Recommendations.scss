@@ -1,0 +1,36 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/breakpoints" as *;
+@use "../../styles/partials/variables" as *;
+
+.outfit-gallery {
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  @include tablet {
+    gap: 32px;
+    padding-top: 2rem;
+  }
+}
+.outfit-heading {
+  @include page-header;
+}
+.outfit-card {
+  //   border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.1);
+
+  padding: 10px;
+  &__images {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 40%;
+  }
+  &__image {
+    width: 150px;
+    height: auto;
+    margin: 0;
+    padding: 1rem;
+  }
+}
