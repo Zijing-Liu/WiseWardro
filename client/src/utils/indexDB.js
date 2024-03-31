@@ -81,14 +81,17 @@ async function getImages() {
     };
   });
 }
+async function hasImages() {
+  const db = await initDB(); // Initialize the IndexedDB
+  return db.objectStoreNames.contains("images");
+}
 // Function to clear images from IndexedDB
 async function clearImages() {
   const db = await initDB(); // Initialize the IndexedDB
 
   const transaction = db.transaction("images", "readwrite");
   const store = transaction.objectStore("images");
-
-  const clearRequest = store.clear(); // Request to clear all entries in the store
+  const clearRequest = store.clear(); // Request to clear all entries in the store named
 
   return new Promise((resolve, reject) => {
     clearRequest.onsuccess = () => {
@@ -151,6 +154,7 @@ export {
   openDB,
   storeImages,
   getImages,
+  hasImages,
   clearImages,
   saveFavoriteOutfit,
   removeFavoriteOutfit,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   getImages,
   clearImages,
+  hasImages,
   saveFavoriteOutfit,
   removeFavoriteOutfit,
 } from "../../utils/indexDB";
@@ -10,38 +11,38 @@ import { getJson } from "../../utils/getJson";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
+import { faV, faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 const Recommendations = ({ style, response }) => {
   const [filled, setFilled] = useState(false);
+  const [error, setError] = useState("");
   // toggle heart when user clicks, and save or remove outfit in IndexDB database
-  const toggleHeart = (outfit) => {
+  const toggleHeart = async (outfit) => {
     const newFilledState = !filled;
     setFilled(newFilledState);
+    // Reconstruct outfit to include image paths
+    const favOutfit = {
+      ...outfit,
+      iamgePaths: Object.entries(outfit.clothes).map((id) => ({
+        id,
+        imagePath: getImageSrc(id),
+      })),
+    };
     if (newFilledState) {
-      // Reconstruct outfit to include image paths
-      const favOutfit = {
-        ...outfit,
-        iamgePaths: Object.entries(outfit.clothes).map((id) => ({
-          id,
-          imagePath: getImageSrc(id),
-        })),
-      };
-      console.log(favOutfit);
-      saveFavoriteOutfit(favOutfit)
-        .then(() => {
-          console.log("Outfit saved to favorites");
-        })
-        .catch((error) => {
-          console.error("Error saving outfit to favorites:", error);
-        });
+      try {
+        console.log("attempt to save image to db");
+        const saved = await saveFavoriteOutfit(favOutfit);
+        setError("");
+      } catch (error) {
+        setError("Failed to save your favoriate outfit", error);
+      }
     } else {
-      removeFavoriteOutfit(outfit.id)
-        .then(() => {
-          console.log("Outfit removed from favorites");
-        })
-        .catch((error) => {
-          console.error("Error removing outfit from favorites:", error);
-        });
+      try {
+        console.log("attempt to remove image from db");
+        const remove = removeFavoriteOutfit(favOutfit.id);
+        setError("");
+      } catch (error) {
+        setError("Failed to r your favoriate outfit, please try again", error);
+      }
     }
   };
 
@@ -59,7 +60,7 @@ const Recommendations = ({ style, response }) => {
       "}]";
   const outfits = getJson(response); // Parse JSON string using getJson function
   const [images, setImages] = useState([]);
-  console.log("logging the gpt response on recommendation", outfits);
+  // console.log("logging the gpt response on recommendation", outfits);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -78,7 +79,7 @@ const Recommendations = ({ style, response }) => {
   // find the src of images stored in indexDB
   const getImageSrc = (imageId) => {
     const image = images.find((img) => img.id === imageId);
-    console.log("the id of the chosen image is", imageId);
+    // console.log("the id of the chosen image is", imageId);
     return image ? image.url : "";
   };
   const reTry = async () => {
@@ -100,6 +101,7 @@ const Recommendations = ({ style, response }) => {
         <h1 className="outfit-heading">
           Here are some outfit ideas to look {style.toLowerCase()}:
         </h1>
+        <div>{error.length > 0 && error}</div>
         <div className="outfit-gallery">
           {outfits.map((outfit) => (
             <div key={outfit.outfit_id} className="outfit-card">
