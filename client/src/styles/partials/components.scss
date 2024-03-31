@@ -1,0 +1,21 @@
+@use "./typography" as *;
+@use "./variables" as *;
+
+@mixin primary__btn {
+  @include label-links-buttons;
+  font-weight: 600;
+  margin: 20px 0px;
+
+  padding: 10px 20px;
+  width: 200px;
+  background-color: $black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  &:hover {
+    background-color: $light-grey;
+    color: $cloud;
+    color: $black;
+  }
+}

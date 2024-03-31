@@ -1,6 +1,7 @@
 @use "../../styles/partials/typography" as *;
 @use "../../styles/partials/breakpoints" as *;
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/components.scss" as *;
 .recommendations {
   display: flex;
   flex-direction: column;
@@ -19,11 +20,16 @@
 }
 .outfit-heading {
   @include page-header;
+  @include tablet {
+    padding-top: 2rem;
+  }
 }
 .outfit-card {
   border-radius: 1rem;
   box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  width: auto; // Or try max-content
+  box-sizing: border-box;
   @include tablet {
     padding: 2rem;
   }
@@ -31,14 +37,49 @@
   &__images {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    gap: 10px;
-    width: 40%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0;
+    @include desktop {
+      max-width: 100%;
+      gap: 1rem;
+    }
   }
   &__image {
-    width: 150px;
+    width: 100px;
     height: auto;
     margin: 0;
-    padding: 1rem;
+    @include tablet {
+      width: 150px;
+    }
+    @include desktop {
+      width: 200px;
+    }
   }
+  &__text {
+    @include body-large;
+    @include desktop {
+      max-width: 60vw;
+    }
+  }
+  &__heading {
+    @include subheader;
+    text-align: center;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.primary__btn {
+  @include primary__btn;
+}
+.icon {
+  width: 25px;
+  height: auto;
+  color: none;
 }

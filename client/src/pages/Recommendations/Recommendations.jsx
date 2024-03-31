@@ -1,14 +1,66 @@
 import React, { useEffect, useState } from "react";
-import { getImages } from "../../utils/indexDB";
+import {
+  getImages,
+  clearImages,
+  saveFavoriteOutfit,
+  removeFavoriteOutfit,
+} from "../../utils/indexDB";
 import "./Recommendations.scss";
 import { getJson } from "../../utils/getJson";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 const Recommendations = ({ style, response }) => {
+  const [filled, setFilled] = useState(false);
+  // toggle heart when user clicks, and save or remove outfit in IndexDB database
+  const toggleHeart = (outfit) => {
+    const newFilledState = !filled;
+    setFilled(newFilledState);
+    if (newFilledState) {
+      // Reconstruct outfit to include image paths
+      const favOutfit = {
+        ...outfit,
+        iamgePaths: Object.entries(outfit.clothes).map((id) => ({
+          id,
+          imagePath: getImageSrc(id),
+        })),
+      };
+      console.log(favOutfit);
+      saveFavoriteOutfit(favOutfit)
+        .then(() => {
+          console.log("Outfit saved to favorites");
+        })
+        .catch((error) => {
+          console.error("Error saving outfit to favorites:", error);
+        });
+    } else {
+      removeFavoriteOutfit(outfit.id)
+        .then(() => {
+          console.log("Outfit removed from favorites");
+        })
+        .catch((error) => {
+          console.error("Error removing outfit from favorites:", error);
+        });
+    }
+  };
+
   const navigate = useNavigate();
   // console.log("recommendation page: ", typeof response, response);
+  response =
+    response ||
+    "Based on the images provided, I can compile a single outfit that aligns with an Elegant style for a 25 to 40-year-old female. Since there is only one piece per clothing item type, there will be one outfit. Here's the outfit breakdown:\n" +
+      "\n" +
+      "[{\n" +
+      '"outfit_id":0,\n' +
+      '"clothes":["image1","image2","image3","image4"],\n' +
+      '"score":8,\n' +
+      '"considerations":"The outfit consists of classic black shoes, which are a timeless element of elegant fashion. The wide-legged denim trousers offer a contemporary twist that can still fit within sophisticated attire if styled correctly. The white shirt provides a crisp and clean look that is versatile for elegant styling. Lastly, the trench coat adds a refined and polished finish to the ensemble, contributing to the overall elegance. The combination is cohesive and modern while adhering to the principles of elegant style, hence the score of 8. The only point of contention that prevents a full score is the casual nature of the denim, which is not always associated with high elegance but can be elevated with the right accessories and shoes."\n' +
+      "}]";
   const outfits = getJson(response); // Parse JSON string using getJson function
   const [images, setImages] = useState([]);
   console.log("logging the gpt response on recommendation", outfits);
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -29,7 +81,10 @@ const Recommendations = ({ style, response }) => {
     console.log("the id of the chosen image is", imageId);
     return image ? image.url : "";
   };
-
+  const reTry = async () => {
+    const clearDB = await clearImages();
+    navigate(-1);
+  };
   if (images.length === 0 || !response || response.length === 0) {
     return <div className="outfit__loading">Loading...</div>;
   } else if (response.length > 0 && !outfits) {
@@ -48,7 +103,18 @@ const Recommendations = ({ style, response }) => {
         <div className="outfit-gallery">
           {outfits.map((outfit) => (
             <div key={outfit.outfit_id} className="outfit-card">
-              <h3>Outfit {outfit.outfit_id}</h3>
+              <div className="outfit-card__header">
+                <h2 className="outfit-card__text outfit-card__heading">
+                  Outfit {outfit.outfit_id}
+                </h2>
+                <div onClick={() => toggleHeart(outfit)}>
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={filled ? fasHeart : farHeart}
+                    style={{ color: filled ? "pink" : "black" }}
+                  />
+                </div>
+              </div>
               <div className="outfit-card__images">
                 {Object.entries(outfit.clothes).map(([index, id]) => (
                   <img
@@ -59,10 +125,14 @@ const Recommendations = ({ style, response }) => {
                   />
                 ))}
               </div>
-              <p>Score: {outfit.score}</p>
+              <p className="outfit-card__text">Score: {outfit.score}</p>
+              <p className="outfit-card__text">{outfit.considerations}</p>
             </div>
           ))}
         </div>
+        <button className="primary__btn" onClick={reTry}>
+          Try New Looks
+        </button>
       </div>
     );
   }
