@@ -9,6 +9,8 @@
   align-items: center;
 }
 .outfit-gallery {
+  padding: 0;
+  margin: 0;
   padding-top: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -34,11 +36,15 @@
   border-radius: 1rem;
   box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: 420px; // Fixed width
+  width: fit-content;
   max-width: 420px; // Prevent it from expanding
   box-sizing: border-box;
   @include tablet {
     padding: 2rem;
+    width: 40vw; // Fixed width
+  }
+  @include desktop {
+    width: 30vw; // Fixed width
   }
 
   &__images {
@@ -64,7 +70,6 @@
   }
   &__text {
     @include body-large;
-    width: 300px;
     text-wrap: wrap;
     @include desktop {
       box-sizing: border-box;
