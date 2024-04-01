@@ -47,5 +47,8 @@
 **POST** (api/clothes): send a list of image files in the payload, get the resopnse from openAI open with messages of oufit advice.
 
 External API reference[openai](https://platform.openai.com/docs/guides/vision)
-Screenshots
-Lessons learned & next steps
+
+## Lessons learned & next steps
+
+- In order to get more accurated result, the prompt needs to be further refined.
+- Currently the app uses IndexDB for client-side image storage, and images are comminicated as formdata between the client and server. Will explore data clould
