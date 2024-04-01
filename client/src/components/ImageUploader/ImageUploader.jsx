@@ -5,7 +5,7 @@ import closeIcon from "../../asset/close.svg";
 import StartStyling from "../StartStyling/StartStyling";
 import uploadIcon from "../../asset/upload.png";
 const ImageUploader = ({ images, setImages }) => {
-  const maxNumber = 10; // max # of images a user can upload per time
+  const maxNumber = 5; // max # of images a user can upload per time
 
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
@@ -22,7 +22,7 @@ const ImageUploader = ({ images, setImages }) => {
         multiple
         value={images}
         onChange={onChange}
-        maxNumber={10}
+        maxNumber={5}
         dataURLKey="data_url"
       >
         {({

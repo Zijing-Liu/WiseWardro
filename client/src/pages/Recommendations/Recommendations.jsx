@@ -76,7 +76,7 @@ const Recommendations = ({ response, setResponse, style }) => {
   if (images.length === 0 || !response || response.length === 0) {
     // case1: no response from api
     return <div className="outfit__loading">Loading...</div>;
-  } else if (!outfits) {
+  } else if (!outfits || outfits.length === 0) {
     // case2: there are response, but gpt failed to answer the request, outfits in null
     return (
       <div className="recommendations">
