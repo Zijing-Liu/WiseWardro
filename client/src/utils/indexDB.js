@@ -149,7 +149,7 @@ async function removeFavoriteOutfit(outfitId) {
 }
 async function hasImages() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("WiseWardrobe", 1);
+    const request = indexedDB.open("WiseWardro", 1);
 
     request.onerror = () => {
       reject(new Error("Could not open the IndexedDB database."));
@@ -159,15 +159,14 @@ async function hasImages() {
       const db = event.target.result;
       const transaction = db.transaction("images", "readonly");
       const store = transaction.objectStore("images");
-      const cursorRequest = store.openCursor();
+      const countRequest = store.count(); // count the number of records in the store
 
-      cursorRequest.onsuccess = (e) => {
-        const cursor = e.target.result;
-        resolve(!!cursor); // Return true if there is data (cursor is not null), false otherwise
+      countRequest.onsuccess = () => {
+        resolve(countRequest.result > 0); // true if there's one or more records
       };
 
-      cursorRequest.onerror = () => {
-        reject(new Error("Failed to read from the 'images' store."));
+      countRequest.onerror = () => {
+        reject(new Error("Failed to count records in the 'images' store."));
       };
     };
 
@@ -179,7 +178,6 @@ async function hasImages() {
     };
   });
 }
-
 export {
   initDB,
   openDB,

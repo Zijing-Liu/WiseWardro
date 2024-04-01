@@ -18,10 +18,16 @@
     padding-top: 2rem;
   }
 }
-.outfit-heading {
-  @include page-header;
-  @include tablet {
-    padding-top: 2rem;
+
+.outfit {
+  &__heading {
+    @include page-header;
+    @include tablet {
+      padding-top: 2rem;
+    }
+  }
+  &__errer-text {
+    @include body-large;
   }
 }
 .outfit-card {

@@ -1,13 +1,16 @@
-export const getJson = (str) => {
-  // Regular expression to extract the JSON array of objects
-  const regex = /\[\{.*?\}\]/gs;
-  const matches = str.match(regex);
-  if (matches && matches.length > 0) {
-    const jsonArray = JSON.parse(matches[0]);
-    console.log("json", jsonArray);
-    return jsonArray;
-  } else {
-    console.log("No JSON array found");
-    return null;
+export function getJson(message) {
+  const jsonPattern = /```json\n([\s\S]*?)\n```/g; // Pattern to match JSON blocks
+  const jsonData = [];
+
+  let match;
+  while ((match = jsonPattern.exec(message)) !== null) {
+    try {
+      const parsedData = JSON.parse(match[1]);
+      jsonData.push(...parsedData);
+    } catch (error) {
+      console.error("Error parsing JSON data:", error);
+    }
   }
-};
+
+  return jsonData;
+}

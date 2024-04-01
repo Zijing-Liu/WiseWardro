@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./App.scss";
 import Recommendations from "./pages/Recommendations/Recommendations";
 import MyOutfits from "./pages/MyOutfits/MyOutfits";
-import MyClothes from "./pages/MyClothes/MyClothes";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
@@ -31,10 +30,15 @@ function App() {
             />
             <Route
               path="/recommendations"
-              element={<Recommendations response={response} style={style} />}
+              element={
+                <Recommendations
+                  response={response}
+                  setResponse={setResponse}
+                  style={style}
+                />
+              }
             />
             <Route path="/my-outftis" element={<MyOutfits />} />
-            <Route path="/my-clothes" element={<MyClothes />} />
           </Routes>
         </main>
         <Footer />
