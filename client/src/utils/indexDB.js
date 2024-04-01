@@ -106,16 +106,22 @@ async function clearImages() {
 
 // Function to save an outfit to the favorites store in IndexedDB
 async function saveFavoriteOutfit(outfit) {
-  const db = await initDB(); // Assume initDB() opens the IndexedDB and creates the object store if necessary
+  const db = await initDB();
+  const transaction = db.transaction("favorites", "readwrite");
+  const store = transaction.objectStore("favorites");
 
-  const transaction = db.transaction("favImages", "readwrite");
-  const store = transaction.objectStore("favImages");
+  // Modify the outfit object to have an 'id' key instead of 'outfit_id'
+  const outfitToSave = {
+    ...outfit,
+    id: outfit.outfit_id,
+  };
+  delete outfitToSave.outfit_id; // remove the original outfit_id if necessary
 
   return new Promise((resolve, reject) => {
-    const request = store.put(outfit); // Using 'put' to either add or update the record
+    const request = store.put(outfitToSave);
 
     request.onsuccess = () => {
-      console.log(`Outfit ${outfit.outfit_id} saved successfully.`);
+      console.log(`Outfit ${outfitToSave.id} saved successfully.`);
       resolve();
     };
 
@@ -132,8 +138,8 @@ async function saveFavoriteOutfit(outfit) {
 async function removeFavoriteOutfit(outfitId) {
   const db = await initDB(); // Make sure this function initializes IndexedDB and opens the desired database
 
-  const transaction = db.transaction("favImages", "readwrite");
-  const store = transaction.objectStore("favImages");
+  const transaction = db.transaction("favorites", "readwrite");
+  const store = transaction.objectStore("favorites");
 
   return new Promise((resolve, reject) => {
     const request = store.delete(outfitId); // Use the delete method with the outfit's ID
