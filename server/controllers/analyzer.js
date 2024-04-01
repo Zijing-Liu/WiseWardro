@@ -15,26 +15,13 @@ const analyzer = async (req, res) => {
       score: 10,
       considerations: "",
     },
-    {
-      outfit_id: 1,
-      clothes: ["image4", "image5", "image6"],
-      score: 9,
-      considerations: "",
-    },
   ]);
-  const textContent = `I have a collection of images encoded in base64 ${imageUrls} , each showing a different piece of clothing. I need to assemble various outfits for a 25 to 40-year-old female in the ${selectedstyle} style. Using these images, can you help me compile 1 or more outfits based on the total number of images provided where each type of clothing item (like a jacket) appears only once per outfit? 
-
-  For each outfit, please provide:
-  - An automatically generated outfit identifier (outfit_id).
-  - A list of clothes, represented by their image ids, selected for the outfit.
-  - A score from 0 to 10, indicating how well the outfit aligns with the ${selectedstyle} style.
-  - A brief explanation of your choices, focusing on style coherence and your expertise in female fashion.
-  
-  The output should be in the format of a list of JSON objects, similar to: ${formatExample}`;
+  const textContent = `I have a collection of images encoded in base64, they are ${imageUrls}, each showing a different piece of clothing. I need to create multiple outfits for a 25 to 30-year-old female in a ${selectedstyle} style. Based on these images, first analyze the images based on color, style, texture,  then mix and match these clothes to form 1-5 outfits. Each outfit should be a combination of these pieces, suited for  ${selectedstyle} attire.\nFor each outfit, provide a list that includes:\n- An outfit identifier (outfit_id) (auto-generated)\n- A short description of each piece of clothing in the outfit, including the category, color. the clothes_id is the index of the image provided in the collection\n - A score from 0 to 10, reflecting how well the outfit matches the Business Casual style.\n Your output should be JSON , in following format\n ${formatExample}.`;
   const imagesContent = imageUrls.map((url) => ({
     type: "image_url",
     image_url: {
       url: url,
+      detail: "low",
     },
   }));
 

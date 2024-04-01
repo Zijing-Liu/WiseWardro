@@ -6,8 +6,8 @@ async function convertImageToBase64(filePath) {
   try {
     // Reduce the size or quality here. Adjust the resize width, height, and quality as needed
     const buffer = await sharp(filePath)
-      .resize({ width: 150 }) // Resize to 800 pixels in width, keeping aspect ratio
-      .jpeg({ quality: 80 }) // Convert to JPEG with 80% quality
+      .resize({ width: 100 }) // Resize to 800 pixels in width, keeping aspect ratio
+      .jpeg({ quality: 50 }) // Convert to JPEG with 80% quality
       .toBuffer();
 
     // Convert to Base64
