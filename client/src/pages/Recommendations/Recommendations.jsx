@@ -26,6 +26,8 @@ const Recommendations = ({ response, setResponse, style }) => {
     setFavoriteStatus(initialStatus);
   }, [response]);
 
+  // example response, keep for demostrating purpose in case gpt4 api is down
+
   setResponse(
     "The base64 strings provided are not decoded into images within this environment, but I'll address this as if I am able to analyze the images of clothing articles based on color, style, and texture and then combine them into elegant outfits for a 25 to 30-year-old female.\n" +
       "\n" +
@@ -75,12 +77,21 @@ const Recommendations = ({ response, setResponse, style }) => {
     const currentStatus = favoriteStatus[outfit.outfit_id];
     const newStatus = { ...favoriteStatus, [outfit.outfit_id]: !currentStatus };
     setFavoriteStatus(newStatus);
-
+    // Reconstruct outfit to include image paths
+    const favOutfit = {
+      ...outfit,
+      imagePaths: outfit.clothes.map((id) => ({
+        id,
+        imagePath: getImageSrc(id),
+      })),
+    };
+    console.log(images);
+    console.log(favOutfit);
     if (!currentStatus) {
       try {
-        console.log(outfit);
+        console.log(favOutfit);
         console.log("Attempt to save image to db");
-        await saveFavoriteOutfit(outfit);
+        await saveFavoriteOutfit(favOutfit);
         setError("");
       } catch (error) {
         console.error("Failed to save your favorite outfit", error);
@@ -114,11 +125,9 @@ const Recommendations = ({ response, setResponse, style }) => {
 
     fetchImages();
   }, []);
-
   // find the src of images stored in indexDB
   const getImageSrc = (imageId) => {
     const image = images.find((img) => img.id === imageId);
-    // console.log("the id of the chosen image is", imageId);
     return image ? image.url : "";
   };
 
@@ -162,7 +171,7 @@ const Recommendations = ({ response, setResponse, style }) => {
                     style={{
                       color: favoriteStatus[outfit.outfit_id]
                         ? "pink"
-                        : "black",
+                        : "#5c667e",
                     }}
                   />
                 </div>

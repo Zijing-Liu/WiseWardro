@@ -189,6 +189,31 @@ async function hasImages() {
     };
   });
 }
+
+// Function to retrieve all outfits from the favorites store in IndexedDB
+async function getFavoriteOutfits() {
+  const db = await initDB(); // Ensure this function opens the correct IndexedDB
+
+  const transaction = db.transaction("favorites", "readonly");
+  const store = transaction.objectStore("favorites");
+
+  return new Promise((resolve, reject) => {
+    const request = store.getAll(); // Retrieve all records from the store
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result); // Returns an array of outfits
+    };
+
+    request.onerror = (event) => {
+      console.error(
+        "Error fetching favorite outfits from IndexedDB:",
+        event.target.error
+      );
+      reject(event.target.error);
+    };
+  });
+}
+
 export {
   initDB,
   openDB,
@@ -198,4 +223,5 @@ export {
   clearImages,
   saveFavoriteOutfit,
   removeFavoriteOutfit,
+  getFavoriteOutfits,
 };
