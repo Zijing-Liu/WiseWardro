@@ -82,10 +82,7 @@ const Recommendations = ({ style, response }) => {
     // console.log("the id of the chosen image is", imageId);
     return image ? image.url : "";
   };
-  const reTry = async () => {
-    const clearDB = await clearImages();
-    navigate(-1);
-  };
+
   if (images.length === 0 || !response || response.length === 0) {
     return <div className="outfit__loading">Loading...</div>;
   } else if (response.length > 0 && !outfits) {
@@ -132,9 +129,7 @@ const Recommendations = ({ style, response }) => {
             </div>
           ))}
         </div>
-        <button className="primary__btn" onClick={reTry}>
-          Try New Looks
-        </button>
+        <button className="primary__btn">Try New Looks</button>
       </div>
     );
   }

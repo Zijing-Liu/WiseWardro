@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 const StartStyling = ({ style, setStyle, response, setResponse, images }) => {
   const [errors, setErrors] = useState({});
-  const [request, setRequest] = useState(false);
+  const [request, setRequest] = useState(false); // the loading state
   const [apiCallFinished, setApiCallFinished] = useState(false);
 
   const base_url = process.env.REACT_APP_BASE_URL;
@@ -34,28 +34,30 @@ const StartStyling = ({ style, setStyle, response, setResponse, images }) => {
   //clear out the old images stored in indexDB upon reload of this page
   useEffect(() => {
     const clearDatabase = async () => {
-      if (hasImages) {
-        try {
-          await clearImages();
-          console.log("Images cleared successfully.");
-        } catch (error) {
-          console.error("Failed to clear history images:", error);
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            db: "Failed to clear history images, please try again",
-          }));
+      try {
+        const ImagesStoreHasData = await hasImages();
+        if (!ImagesStoreHasData) {
+          return;
         }
+        await clearImages();
+        console.log("Images cleared successfully.");
+      } catch (error) {
+        console.error("Failed to clear history images:", error);
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          db: "Failed to clear history images, please try again",
+        }));
       }
     };
-
     clearDatabase();
   }, []);
   useEffect(() => {
-    if (response.length > 0 && request) {
+    if (apiCallFinished && response.length > 0) {
+      // ensure gpt4 has send back meaningful resonse
       navigate("/recommendations");
       setApiCallFinished(false); // Reset the flag after navigating
     }
-  }, [response, apiCallFinished, navigate]); // re-render the page when the response is upadated
+  }, [apiCallFinished]); // re-render the page when the response is upadated
 
   const handleClick = async () => {
     const errors = {};
@@ -138,6 +140,7 @@ const StartStyling = ({ style, setStyle, response, setResponse, images }) => {
         {errors.images && <p className="error">{errors.images}</p>}
         {errors.style && <p className="error">{errors.style}</p>}
         {errors.api && <p className="error">{errors.api}</p>}
+        {errors.db && <p className="error">{errors.db}</p>}
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 import { openDB } from "idb";
 // Function to initialize the IndexedDB
-export async function initDB() {
+async function initDB() {
   if (!("indexedDB" in window)) {
     throw new Error("IndexedDB support is required");
   }
 
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("myDatabase", 1);
+    const request = indexedDB.open("WiseWardro", 1);
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("images")) {
@@ -25,6 +25,7 @@ export async function initDB() {
     };
   });
 }
+
 // Function to store images in IndexedDB
 async function storeImages(images, formDataKeys) {
   const db = await initDB();
@@ -51,7 +52,7 @@ async function storeImages(images, formDataKeys) {
 // function to retrieve images from indexDB database
 async function getImages() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("myDatabase");
+    const request = indexedDB.open("WiseWardro");
 
     request.onerror = (event) => {
       console.error("Database error:", event.target.error);
@@ -81,10 +82,7 @@ async function getImages() {
     };
   });
 }
-async function hasImages() {
-  const db = await initDB(); // Initialize the IndexedDB
-  return db.objectStoreNames.contains("images");
-}
+
 // Function to clear images from IndexedDB
 async function clearImages() {
   const db = await initDB(); // Initialize the IndexedDB
@@ -149,8 +147,41 @@ async function removeFavoriteOutfit(outfitId) {
     };
   });
 }
+async function hasImages() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("WiseWardrobe", 1);
+
+    request.onerror = () => {
+      reject(new Error("Could not open the IndexedDB database."));
+    };
+
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction("images", "readonly");
+      const store = transaction.objectStore("images");
+      const cursorRequest = store.openCursor();
+
+      cursorRequest.onsuccess = (e) => {
+        const cursor = e.target.result;
+        resolve(!!cursor); // Return true if there is data (cursor is not null), false otherwise
+      };
+
+      cursorRequest.onerror = () => {
+        reject(new Error("Failed to read from the 'images' store."));
+      };
+    };
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("images")) {
+        db.createObjectStore("images", { keyPath: "id" });
+      }
+    };
+  });
+}
 
 export {
+  initDB,
   openDB,
   storeImages,
   getImages,
