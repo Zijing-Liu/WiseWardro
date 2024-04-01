@@ -11,13 +11,10 @@
 
 ## Features and/or usage instructions
 
-1. Uploads images with drags and drop
+1. Uploads images with drags and drop, and selected styles before consuliting outfit ideas
    ![upload images](./upload_images.png)
 
-2. Select styles and consult AI Stylist for outfit suggestions
-   ![start analyzing](./analyzing_images.png)
-
-3. Get outfit inspirations
+2. Get outfit inspirations
    ![get outfit ideas analyzing](./recommendations.png)
 
 ## Installation
