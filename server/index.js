@@ -5,7 +5,6 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const port = process.env.PORT;
-const usersRoutes = require("./routes/users");
 const clothesRoutes = require("./routes/clothes");
 const outfitsRoutes = require("./routes/outfits");
 const path = require("path");
@@ -18,7 +17,6 @@ app.use(express.json({ limit: "1mb" }));
 // server static files in the public folder
 app.use("/public", express.static(path.join(__dirname, "../client/public")));
 
-app.use("/api/users", usersRoutes);
 app.use("/api/clothes", clothesRoutes);
 app.use("/api/outfits", outfitsRoutes);
 
