@@ -32,10 +32,6 @@ Special Considerations
 
 ### Features
 
-**User SignUp/Login**: Support users to create a profile, login with email and password.
-
-**User Profile**: Overview of user account information, allowing user to set up their style preference, and retrivew the list of favorite outfits.
-
 **Clothing Uploader**: Allow users to upload images of their existing clothing items into the app.
 
 **Image Property Extration**: Extrat the features of user-uploaded image, including colors and descriptive labels.
