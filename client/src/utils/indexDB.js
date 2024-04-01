@@ -106,35 +106,40 @@ async function clearImages() {
 
 // Function to save an outfit to the favorites store in IndexedDB
 async function saveFavoriteOutfit(outfit) {
-  const db = await initDB();
+  const db = await initDB(); // Assume initDB() opens the IndexedDB and creates the object store if necessary
 
-  const transaction = db.transaction("favorites", "readwrite");
-  const store = transaction.objectStore("favorites");
+  const transaction = db.transaction("favImages", "readwrite");
+  const store = transaction.objectStore("favImages");
 
   return new Promise((resolve, reject) => {
-    const request = store.put(outfit); // Assuming outfit has an 'id' property
+    const request = store.put(outfit); // Using 'put' to either add or update the record
 
     request.onsuccess = () => {
+      console.log(`Outfit ${outfit.outfit_id} saved successfully.`);
       resolve();
     };
 
     request.onerror = (event) => {
-      reject("IndexedDB error: " + event.target.errorCode);
+      console.error(
+        "Error saving the outfit to IndexedDB:",
+        event.target.error
+      );
+      reject(event.target.error);
     };
   });
 }
 // Function to remove an outfit from the favorites store in IndexedDB
 async function removeFavoriteOutfit(outfitId) {
-  const db = await initDB();
+  const db = await initDB(); // Make sure this function initializes IndexedDB and opens the desired database
 
-  const transaction = db.transaction("favorites", "readwrite");
-  const store = transaction.objectStore("favorites");
+  const transaction = db.transaction("favImages", "readwrite");
+  const store = transaction.objectStore("favImages");
 
   return new Promise((resolve, reject) => {
-    const request = store.delete(outfitId);
+    const request = store.delete(outfitId); // Use the delete method with the outfit's ID
 
     request.onsuccess = () => {
-      console.log(`Outfit with id ${outfitId} removed from favorites`);
+      console.log(`Outfit with id ${outfitId} removed from favorites.`);
       resolve();
     };
 

@@ -34,7 +34,8 @@
   border-radius: 1rem;
   box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: auto; // Or try max-content
+  width: 420px; // Fixed width
+  max-width: 420px; // Prevent it from expanding
   box-sizing: border-box;
   @include tablet {
     padding: 2rem;
@@ -48,13 +49,11 @@
     gap: 8px;
     padding: 0;
     @include desktop {
-      max-width: 100%;
       gap: 1rem;
     }
   }
   &__image {
     width: 100px;
-    height: auto;
     margin: 0;
     @include tablet {
       width: 150px;
@@ -65,8 +64,11 @@
   }
   &__text {
     @include body-large;
+    width: 300px;
+    text-wrap: wrap;
     @include desktop {
-      max-width: 60vw;
+      box-sizing: border-box;
+      word-wrap: break-word; // Ensure text wraps and doesn't overflow
     }
   }
   &__heading {
@@ -88,4 +90,9 @@
   width: 25px;
   height: auto;
   color: none;
+}
+
+.error {
+  color: red;
+  @include body-large;
 }
