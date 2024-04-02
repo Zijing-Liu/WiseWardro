@@ -15,9 +15,10 @@
    ![upload images](./upload_images.png)
 
 2. Get outfit inspirations
-
-<img src="./recommendations.png" alt="get outfit ideas desktop view" height="240px" style="inline-block"/>
-<img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="240px" />
+   <div style="display: inline;">
+     <img  style="display: inline;" src="./recommendations.png" alt="get outfit ideas desktop view" height="240px" style="margin-right: 10px;" />
+     <img  style="display: inline;" src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="240px" />
+   </div>
 
 ## Installation
 
