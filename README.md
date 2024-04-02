@@ -19,6 +19,11 @@
      <img  src="./recommendations.png" alt="get outfit ideas desktop view" height="320px" style="margin-right: 10px;" />
      <img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="320px" />
    </div>
+3. Save an outfit as favorites
+   ![save or remove an outfit](./fav_unfav_outfits.png)
+
+4. check all saved outfits
+   ![my favorite outfits](./my-outfits.png)
 
 ## Installation
 
