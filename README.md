@@ -16,8 +16,8 @@
 
 2. Get outfit inspirations
 
-<img src="./recommendations.png" alt="get outfit ideas desktop view" height="300px" style="inline-block"/>
-<img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="300px" />
+<img src="./recommendations.png" alt="get outfit ideas desktop view" height="240px" style="inline-block"/>
+<img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="240px" />
 
 ## Installation
 
