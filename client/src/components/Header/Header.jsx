@@ -11,9 +11,6 @@ export default function Header() {
       </NavLink>
 
       <ul className="header__list">
-        <NavLink to="/my-wardrobe" as="li" className="header__list-item">
-          My Wardrobe
-        </NavLink>
         <NavLink to="/my-outfits" as="li" className="header__list-item">
           My Outfits
         </NavLink>

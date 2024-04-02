@@ -30,13 +30,7 @@ function App() {
             />
             <Route
               path="/recommendations"
-              element={
-                <Recommendations
-                  response={response}
-                  setResponse={setResponse}
-                  style={style}
-                />
-              }
+              element={<Recommendations response={response} style={style} />}
             />
             <Route path="/my-outfits" element={<MyOutfits />} />
           </Routes>

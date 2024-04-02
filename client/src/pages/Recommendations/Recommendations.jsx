@@ -12,29 +12,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as farHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 
-const Recommendations = ({ response, setResponse, style }) => {
+const Recommendations = ({ response, style }) => {
   const [favoriteStatus, setFavoriteStatus] = useState({}); // State to track favorites
   const [error, setError] = useState("");
   // Initialize favorite status from outfits
-  setResponse(
-    "To provide the outfits as requested, I will analyze the images of the clothing items provided. Please note that the actual style match might vary depending on current fashion trends and individual tastes, but I will do my best to provide outfits that are casual and trendy for a 25 to 30-year-old female.\n" +
-      "\n" +
-      "After analyzing the images, here are the outfit combinations:\n" +
-      "\n" +
-      "```json\n" +
-      "[\n" +
-      "    {\n" +
-      '        "outfit_id": 0,\n' +
-      '        "clothes": ["image0", "image1", "image2"],\n' +
-      '        "score": 8,\n' +
-      '        "considerations": "The black vest paired with black printed trousers creates a coordinated look. The striped tee adds a casual element suitable for daywear, while maintaining an overall chic, monochrome palette."\n' +
-      "    }\n" +
-      "]\n" +
-      "```\n" +
-      "\n" +
-      "The provided image0 is a black vest, image1 is a pair of black printed trousers, and image2 is a white and black striped tee. This outfit uses neutral colors for an effortless casual style, while the addition of a pattern with the trousers gives it an edge. The score reflects that the outfit is casual but has a touch of formality because of the vest, which might not be a staple in every casual wardrobe."
-  );
-
   useEffect(() => {
     const initialStatus = {};
     getJson(response).forEach((outfit) => {
@@ -86,7 +67,7 @@ const Recommendations = ({ response, setResponse, style }) => {
         const storedImages = await getImages();
         setImages(storedImages || []);
       } catch (error) {
-        console.error("Error fetching images:", error);
+        console.log("Error fetching images:", error);
       }
     };
     fetchImages();
