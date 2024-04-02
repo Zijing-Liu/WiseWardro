@@ -1,29 +1,34 @@
 import { openDB } from "idb";
 // Function to initialize the IndexedDB
+// Function to initialize the IndexedDB
 async function initDB() {
-  if (!("indexedDB" in window)) {
-    throw new Error("IndexedDB support is required");
+  const dbName = "WiseWardro1";
+  const dbVersion = 1;
+  try {
+    const db = await openDB(dbName, dbVersion, {
+      upgrade(db, oldVersion, newVersion, transaction) {
+        console.log(
+          `Upgrading IndexedDB from version ${oldVersion} to ${newVersion}`
+        );
+        // Create "images" store if it doesn't exist
+        if (!db.objectStoreNames.contains("images")) {
+          db.createObjectStore("images", { keyPath: "id" });
+        }
+        // Create "favorites" store if it doesn't exist
+        if (!db.objectStoreNames.contains("favorites")) {
+          db.createObjectStore("favorites", { keyPath: "id" });
+        }
+        // Create "favImages" store if it doesn't exist
+        if (!db.objectStoreNames.contains("favImages")) {
+          db.createObjectStore("favImages", { keyPath: "id" });
+        }
+      },
+    });
+
+    return db;
+  } catch (error) {
+    throw new Error(`IndexedDB error: ${error}`);
   }
-
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open("WiseWardro", 1);
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      if (!db.objectStoreNames.contains("images")) {
-        db.createObjectStore("images", { keyPath: "id" });
-      }
-      if (!db.objectStoreNames.contains("favorites")) {
-        db.createObjectStore("favorites", { keyPath: "id" });
-      }
-    };
-    request.onerror = (event) => {
-      reject("IndexedDB error: " + event.target.errorCode);
-    };
-
-    request.onsuccess = (event) => {
-      resolve(event.target.result);
-    };
-  });
 }
 
 // Function to store images in IndexedDB
@@ -49,10 +54,82 @@ async function storeImages(images, formDataKeys) {
     };
   });
 }
+// Function to store favImages images in IndexedDB
+
+// Function to store images in the favImages store of IndexedDB
+async function storeFavImages(images) {
+  const dbName = "WiseWardro1";
+  const storeName = "favImages";
+  const dbVersion = 1; // Use the current version of your database
+
+  // Open the database
+  const db = await openDB(dbName, dbVersion, {
+    upgrade(db) {
+      // Create the favImages object store if it doesn't exist
+      if (!db.objectStoreNames.contains(storeName)) {
+        db.createObjectStore(storeName, { keyPath: "id" });
+      }
+    },
+  });
+
+  // Start a transaction and get the store
+  const transaction = db.transaction(storeName, "readwrite");
+  const store = transaction.objectStore(storeName);
+
+  // Iterate through the images and add them to the store
+  for (const image of images) {
+    await store.put(image); // Assuming each image has an 'id' property
+  }
+
+  // Wait for the transaction to complete
+  await transaction.done;
+
+  console.log("All favorite images have been stored in IndexedDB.");
+}
+
+async function getFavImages() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("WiseWardro1", 1); // Specify version 1 for database upgrade
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("favImages")) {
+        db.createObjectStore("favImages", { keyPath: "id" }); // Create the object store if it doesn't exist
+      }
+    };
+
+    request.onerror = (event) => {
+      console.error("Database error:", event.target.error);
+      reject(event.target.error);
+    };
+
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction(["favImages"], "readonly");
+      const store = transaction.objectStore("favImages");
+      const getAllRequest = store.getAll();
+
+      getAllRequest.onerror = (event) => {
+        console.error("Error getting data from store:", event.target.error);
+        reject(event.target.error);
+      };
+
+      getAllRequest.onsuccess = (event) => {
+        const images = event.target.result;
+        const imageUrls = images.map((img) => ({
+          id: img.id,
+          url: URL.createObjectURL(new Blob([img.blob])),
+        }));
+        console.log("Retrieved images:", imageUrls);
+        resolve(imageUrls);
+      };
+    };
+  });
+}
 // function to retrieve images from indexDB database
 async function getImages() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("WiseWardro");
+    const request = indexedDB.open("WiseWardro1");
 
     request.onerror = (event) => {
       console.error("Database error:", event.target.error);
@@ -160,7 +237,7 @@ async function removeFavoriteOutfit(outfitId) {
 }
 async function hasImages() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("WiseWardro", 1);
+    const request = indexedDB.open("WiseWardro1", 1);
 
     request.onerror = () => {
       reject(new Error("Could not open the IndexedDB database."));
@@ -224,4 +301,6 @@ export {
   saveFavoriteOutfit,
   removeFavoriteOutfit,
   getFavoriteOutfits,
+  storeFavImages,
+  getFavImages,
 };

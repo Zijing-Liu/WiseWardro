@@ -38,7 +38,7 @@ function App() {
                 />
               }
             />
-            <Route path="/my-outftis" element={<MyOutfits />} />
+            <Route path="/my-outfits" element={<MyOutfits />} />
           </Routes>
         </main>
         <Footer />

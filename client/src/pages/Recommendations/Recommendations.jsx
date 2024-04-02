@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   getImages,
-  clearImages,
-  hasImages,
+  storeFavImages,
   saveFavoriteOutfit,
   removeFavoriteOutfit,
 } from "../../utils/indexDB";
@@ -16,7 +15,30 @@ import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 const Recommendations = ({ response, setResponse, style }) => {
   const [favoriteStatus, setFavoriteStatus] = useState({}); // State to track favorites
   const [error, setError] = useState("");
-
+  setResponse(
+    "Processing the base64 encoded strings provided would require decoding them into images, which isn't a function I'm able to perform. However, with the details you've given and the sample images shown, I can create hypothetical outfits based on the description of the pieces of clothing.\n" +
+      "\n" +
+      "Since I cannot actually decode the base64 strings, I'll base my response on the sample images provided and imagine a collection with items as follows:\n" +
+      "\n" +
+      "- Image 0: A black collared long-sleeve top.\n" +
+      "- Image 1: Blue wide-leg jeans.\n" +
+      "- Image 2: A black tank top.\n" +
+      "\n" +
+      "Based on these items and the idea of creating a 'NYC Style' outfit for a 25 to 30-year-old female, here's a JSON with one hypothetical outfit:\n" +
+      "\n" +
+      "```json\n" +
+      "[\n" +
+      "  {\n" +
+      '    "outfit_id": 0,\n' +
+      '    "clothes": ["image0", "image1", "image2"],\n' +
+      '    "score": 8,\n' +
+      '    "considerations": "Black collared top offers a versatile and polished look that is common in NYC fashion, paired with trendy wide-leg jeans for a modern, city-ready vibe. The black tank top can be worn under the collared top for layering or on its own for a casual look."\n' +
+      "  }\n" +
+      "]\n" +
+      "```\n" +
+      "\n" +
+      "If I could decode and analyze the remaining images, similar outfits with unique identifiers and different combinations could be created for a more varied and exhaustive list."
+  );
   // Initialize favorite status from outfits
   useEffect(() => {
     const initialStatus = {};
@@ -26,71 +48,20 @@ const Recommendations = ({ response, setResponse, style }) => {
     setFavoriteStatus(initialStatus);
   }, [response]);
 
-  // example response, keep for demostrating purpose in case gpt4 api is down
-
-  setResponse(
-    "The base64 strings provided are not decoded into images within this environment, but I'll address this as if I am able to analyze the images of clothing articles based on color, style, and texture and then combine them into elegant outfits for a 25 to 30-year-old female.\n" +
-      "\n" +
-      "Given that I cannot actually view these images, I will give a hypothetical scenario for the sake of providing an exemplar response that one would expect if the images were available.\n" +
-      "\n" +
-      "JSON Output:\n" +
-      "\n" +
-      "```json\n" +
-      "[\n" +
-      "  {\n" +
-      '    "outfit_id": 0,\n' +
-      '    "clothes": ["image0", "image2", "image3"],\n' +
-      '    "score": 8,\n' +
-      '    "considerations": "The first outfit features a classic striped top which adds a touch of playfulness. Paired with a sleek black blazer, the contrast in patterns brings a modern edge to the outfit, while maintaining an elegant silhouette. The addition of a tailored black waistcoat provides structure and creates a sophisticated layered look, perfect for a business casual setting."\n' +
-      "  },\n" +
-      "  {\n" +
-      '    "outfit_id": 1,\n' +
-      '    "clothes": ["image1", "image3"],\n' +
-      '    "score": 7,\n' +
-      `    "considerations": "In this second outfit, the textured black trousers are matched with a black blazer. This monochromatic pairing is timeless, and the texture differentiates each piece while also adding depth to the look. It's elegant in its simplicity, and would work well for an evening event."\n` +
-      "  },\n" +
-      "  {\n" +
-      '    "outfit_id": 2,\n' +
-      '    "clothes": ["image0", "image1"],\n' +
-      '    "score": 6,\n' +
-      '    "considerations": "The third outfit combines a striped top with textured trousers. This look is more casual but still retains elements of elegance through its monochrome color palette and the use of texture to add interest."\n' +
-      "  },\n" +
-      "  {\n" +
-      '    "outfit_id": 3,\n' +
-      '    "clothes": ["image2", "image3"],\n' +
-      '    "score": 9,\n' +
-      '    "considerations": "Outfit four is a classic combination of a black blazer and a waistcoat, presenting a very chic and professional style. The cohesive color choice emphasizes elegance, and the absence of a traditional shirt under the waistcoat adds a modern twist."\n' +
-      "  },\n" +
-      "  {\n" +
-      '    "outfit_id": 4,\n' +
-      '    "clothes": ["image0", "image2"],\n' +
-      '    "score": 7,\n' +
-      '    "considerations": "The final outfit pairs the striped top with the black waistcoat. The contrast of patterns and textures combined with the classic color scheme keeps this look elegant, yet easy to pull off for a day-to-day basis."\n' +
-      "  }\n" +
-      "]\n" +
-      "```\n" +
-      "\n" +
-      "Please note this is a mock-up example. In reality, to accurately score the outfits and provide real considerations, one would need to see the actual clothing items to assess their style, color, and fabric texture, which are key in constructing outfits for an 'Elegant' style theme."
-  );
   // toggle heart when user clicks, and save or remove outfit in IndexDB database
-  const toggleHeart = async (outfit) => {
-    const currentStatus = favoriteStatus[outfit.outfit_id];
-    const newStatus = { ...favoriteStatus, [outfit.outfit_id]: !currentStatus };
-    setFavoriteStatus(newStatus);
-    // Reconstruct outfit to include image paths
-    const favOutfit = {
-      ...outfit,
-      imagePaths: outfit.clothes.map((id) => ({
-        id,
-        imagePath: getImageSrc(id),
-      })),
+  const toggleHeart = async (favOutfit) => {
+    const currentStatus = favoriteStatus[favOutfit.outfit_id];
+    const newStatus = {
+      ...favoriteStatus,
+      [favOutfit.outfit_id]: !currentStatus,
     };
-    console.log(images);
-    console.log(favOutfit);
+    setFavoriteStatus(newStatus);
     if (!currentStatus) {
       try {
-        console.log(favOutfit);
-        console.log("Attempt to save image to db");
+        const imagefiles = favOutfit.clothes.map((imageID) =>
+          getImageFile(imageID)
+        );
+        await storeFavImages(imagefiles);
         await saveFavoriteOutfit(favOutfit);
         setError("");
       } catch (error) {
@@ -100,7 +71,7 @@ const Recommendations = ({ response, setResponse, style }) => {
     } else {
       try {
         console.log("Attempt to remove image from db");
-        await removeFavoriteOutfit(outfit.outfit_id);
+        await removeFavoriteOutfit(favOutfit.outfit_id);
         setError("");
       } catch (error) {
         console.error("Failed to remove your favorite outfit", error);
@@ -130,7 +101,10 @@ const Recommendations = ({ response, setResponse, style }) => {
     const image = images.find((img) => img.id === imageId);
     return image ? image.url : "";
   };
-
+  const getImageFile = (imageId) => {
+    const image = images.find((img) => img.id === imageId);
+    return image ? image : null;
+  };
   if (images.length === 0 || !response || response.length === 0) {
     // case1: no response from api
     return <div className="outfit__loading">Loading...</div>;
@@ -177,7 +151,7 @@ const Recommendations = ({ response, setResponse, style }) => {
                 </div>
               </div>
               <div className="outfit-card__images">
-                {Object.entries(outfit.clothes).map(([index, id]) => (
+                {outfit.clothes.map((id) => (
                   <img
                     className="outfit-card__image"
                     key={id}

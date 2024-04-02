@@ -11,11 +11,11 @@ export default function Header() {
       </NavLink>
 
       <ul className="header__list">
-        <NavLink to="/my-wordrobe" as="li" className="header__list-item">
-          My Wordrobe
+        <NavLink to="/my-wardrobe" as="li" className="header__list-item">
+          My Wardrobe
         </NavLink>
-        <NavLink to="/my-outfit" as="li" className="header__list-item">
-          My Outfit
+        <NavLink to="/my-outfits" as="li" className="header__list-item">
+          My Outfits
         </NavLink>
       </ul>
     </nav>
