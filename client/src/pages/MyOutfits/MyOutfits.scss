@@ -78,23 +78,25 @@
   }
   &__heading {
     @include subheader;
-    text-align: center;
+    text-align: baseline;
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
   }
-}
-
-.icon {
-  width: 25px;
-  height: auto;
-  opacity: 0.8;
 }
 
 .error {
   color: red;
   @include body-large;
+}
+
+.icon {
+  width: 25px;
+  cursor: pointer;
+  opacity: 0.8;
+  &:hover {
+    transform: scale(1.1);
+  }
 }

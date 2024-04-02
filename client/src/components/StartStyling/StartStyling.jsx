@@ -82,8 +82,8 @@ const StartStyling = ({ style, setStyle, response, setResponse, images }) => {
 
     try {
       await storeImages(images, formDataKeys); // store images in IndexedDB
-      const apiResponse = await axios.post(`${base_url}/clothes`, formData); // send formData to api
-      setResponse(apiResponse.data.message.content);
+      // const apiResponse = await axios.post(`${base_url}/clothes`, formData); // send formData to api
+      // setResponse(apiResponse.data.message.content);
       setRequest(false); // Reset request state
       setApiCallFinished(true); // Indicate API call is finished
     } catch (error) {

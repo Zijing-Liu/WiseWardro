@@ -54,7 +54,6 @@ async function storeImages(images, formDataKeys) {
     };
   });
 }
-// Function to store favImages images in IndexedDB
 
 // Function to store images in the favImages store of IndexedDB
 async function storeFavImages(images) {
@@ -153,7 +152,7 @@ async function getImages() {
           url: URL.createObjectURL(img.blob),
         }));
         console.log("Retrieved images:", imageUrls);
-        resolve(imageUrls);
+        resolve(images);
       };
     };
   });
@@ -216,7 +215,6 @@ async function removeFavoriteOutfit(outfitId) {
 
   const transaction = db.transaction("favorites", "readwrite");
   const store = transaction.objectStore("favorites");
-
   return new Promise((resolve, reject) => {
     const request = store.delete(outfitId); // Use the delete method with the outfit's ID
 
@@ -294,11 +292,41 @@ async function getFavoriteOutfits() {
     };
   });
 }
+async function getImageBlobs() {
+  const dbName = "WiseWardro"; // Database name
+  const dbVersion = 2; // Database version
+
+  try {
+    const db = await openDB(dbName, dbVersion); // Open the IndexedDB
+
+    const transaction = db.transaction("images", "readonly"); // Start a read-only transaction
+    const store = transaction.objectStore("images"); // Get the "images" object store
+
+    const getAllRequest = store.getAll(); // Get all images from the store
+
+    return new Promise((resolve, reject) => {
+      getAllRequest.onerror = (event) => {
+        console.error("Error getting images:", event.target.error);
+        reject(event.target.error);
+      };
+
+      getAllRequest.onsuccess = (event) => {
+        const images = event.target.result;
+        resolve(images);
+      };
+    });
+  } catch (error) {
+    console.error("Error opening database:", error);
+    throw error;
+  }
+}
+
 export {
   initDB,
   openDB,
   storeImages,
   getImages,
+  getImageBlobs,
   hasImages,
   clearImages,
   saveFavoriteOutfit,

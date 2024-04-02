@@ -16,6 +16,25 @@ const Recommendations = ({ response, setResponse, style }) => {
   const [favoriteStatus, setFavoriteStatus] = useState({}); // State to track favorites
   const [error, setError] = useState("");
   // Initialize favorite status from outfits
+  setResponse(
+    "To provide the outfits as requested, I will analyze the images of the clothing items provided. Please note that the actual style match might vary depending on current fashion trends and individual tastes, but I will do my best to provide outfits that are casual and trendy for a 25 to 30-year-old female.\n" +
+      "\n" +
+      "After analyzing the images, here are the outfit combinations:\n" +
+      "\n" +
+      "```json\n" +
+      "[\n" +
+      "    {\n" +
+      '        "outfit_id": 0,\n' +
+      '        "clothes": ["image0", "image1", "image2"],\n' +
+      '        "score": 8,\n' +
+      '        "considerations": "The black vest paired with black printed trousers creates a coordinated look. The striped tee adds a casual element suitable for daywear, while maintaining an overall chic, monochrome palette."\n' +
+      "    }\n" +
+      "]\n" +
+      "```\n" +
+      "\n" +
+      "The provided image0 is a black vest, image1 is a pair of black printed trousers, and image2 is a white and black striped tee. This outfit uses neutral colors for an effortless casual style, while the addition of a pattern with the trousers gives it an edge. The score reflects that the outfit is casual but has a touch of formality because of the vest, which might not be a staple in every casual wardrobe."
+  );
+
   useEffect(() => {
     const initialStatus = {};
     getJson(response).forEach((outfit) => {
@@ -37,6 +56,7 @@ const Recommendations = ({ response, setResponse, style }) => {
         const imagefiles = favOutfit.clothes.map((imageID) =>
           getImageFile(imageID)
         );
+        console.log("imagefiles", imagefiles);
         await storeFavImages(imagefiles);
         await saveFavoriteOutfit(favOutfit);
         setError("");
@@ -69,13 +89,12 @@ const Recommendations = ({ response, setResponse, style }) => {
         console.error("Error fetching images:", error);
       }
     };
-
     fetchImages();
   }, []);
   // find the src of images stored in indexDB
   const getImageSrc = (imageId) => {
     const image = images.find((img) => img.id === imageId);
-    return image ? image.url : "";
+    return image ? URL.createObjectURL(image.blob) : "";
   };
   const getImageFile = (imageId) => {
     const image = images.find((img) => img.id === imageId);
