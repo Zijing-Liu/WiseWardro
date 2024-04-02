@@ -16,8 +16,8 @@
 
 2. Get outfit inspirations
    <div style="display: flex; justify-content: space-between">
-     <img  src="./recommendations.png" alt="get outfit ideas desktop view" height="400px" style="margin-right: 10px;" />
-     <img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="400px" />
+     <img  src="./recommendations.png" alt="get outfit ideas desktop view" height="320px" style="margin-right: 10px;" />
+     <img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="320px" />
    </div>
 
 ## Installation
