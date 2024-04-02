@@ -15,30 +15,6 @@ import { faHeart as fasHeart } from "@fortawesome/free-solid-svg-icons";
 const Recommendations = ({ response, setResponse, style }) => {
   const [favoriteStatus, setFavoriteStatus] = useState({}); // State to track favorites
   const [error, setError] = useState("");
-  setResponse(
-    "Processing the base64 encoded strings provided would require decoding them into images, which isn't a function I'm able to perform. However, with the details you've given and the sample images shown, I can create hypothetical outfits based on the description of the pieces of clothing.\n" +
-      "\n" +
-      "Since I cannot actually decode the base64 strings, I'll base my response on the sample images provided and imagine a collection with items as follows:\n" +
-      "\n" +
-      "- Image 0: A black collared long-sleeve top.\n" +
-      "- Image 1: Blue wide-leg jeans.\n" +
-      "- Image 2: A black tank top.\n" +
-      "\n" +
-      "Based on these items and the idea of creating a 'NYC Style' outfit for a 25 to 30-year-old female, here's a JSON with one hypothetical outfit:\n" +
-      "\n" +
-      "```json\n" +
-      "[\n" +
-      "  {\n" +
-      '    "outfit_id": 0,\n' +
-      '    "clothes": ["image0", "image1", "image2"],\n' +
-      '    "score": 8,\n' +
-      '    "considerations": "Black collared top offers a versatile and polished look that is common in NYC fashion, paired with trendy wide-leg jeans for a modern, city-ready vibe. The black tank top can be worn under the collared top for layering or on its own for a casual look."\n' +
-      "  }\n" +
-      "]\n" +
-      "```\n" +
-      "\n" +
-      "If I could decode and analyze the remaining images, similar outfits with unique identifiers and different combinations could be created for a more varied and exhaustive list."
-  );
   // Initialize favorite status from outfits
   useEffect(() => {
     const initialStatus = {};

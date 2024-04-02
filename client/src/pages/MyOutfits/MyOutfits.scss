@@ -1,3 +1,100 @@
 @use "../../styles/partials/typography" as *;
 @use "../../styles/partials/breakpoints" as *;
 @use "../../styles/partials/variables" as *;
+.my-outfits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.outfit-gallery {
+  padding: 0;
+  margin: 0;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+  @include tablet {
+    gap: 20px;
+    padding-top: 2rem;
+  }
+}
+
+.outfit {
+  &__heading {
+    @include page-header;
+    @include tablet {
+      padding-top: 2rem;
+    }
+  }
+  &__errer-text {
+    @include body-large;
+  }
+}
+.outfit-card {
+  border-radius: 1rem;
+  box-shadow: 2px 2px 12px 2px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: fit-content;
+
+  box-sizing: border-box;
+  @include tablet {
+    padding: 2rem;
+    width: 40vw; // Fixed width
+  }
+  @include desktop {
+    // width: vw; // Fixed width
+  }
+
+  &__images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0;
+    @include desktop {
+      gap: 1rem;
+    }
+  }
+  &__image {
+    width: 100px;
+    margin: 0;
+    @include tablet {
+      width: 150px;
+    }
+    @include desktop {
+      width: 200px;
+    }
+  }
+  &__text {
+    @include body-large;
+    text-wrap: wrap;
+    @include desktop {
+      box-sizing: border-box;
+      word-wrap: break-word; // Ensure text wraps and doesn't overflow
+    }
+  }
+  &__heading {
+    @include subheader;
+    text-align: center;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.icon {
+  width: 25px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.error {
+  color: red;
+  @include body-large;
+}

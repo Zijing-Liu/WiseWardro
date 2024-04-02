@@ -120,7 +120,6 @@ async function getFavImages() {
           id: img.id,
           url: URL.createObjectURL(new Blob([img.blob])),
         }));
-        console.log("Retrieved images:", imageUrls);
         resolve(imageUrls);
       };
     };
@@ -269,28 +268,32 @@ async function hasImages() {
 
 // Function to retrieve all outfits from the favorites store in IndexedDB
 async function getFavoriteOutfits() {
-  const db = await initDB(); // Ensure this function opens the correct IndexedDB
-
-  const transaction = db.transaction("favorites", "readonly");
-  const store = transaction.objectStore("favorites");
-
   return new Promise((resolve, reject) => {
-    const request = store.getAll(); // Retrieve all records from the store
-
-    request.onsuccess = (event) => {
-      resolve(event.target.result); // Returns an array of outfits
-    };
+    const request = indexedDB.open("WiseWardro1", 1); // Specify version 1 for database upgrade
 
     request.onerror = (event) => {
-      console.error(
-        "Error fetching favorite outfits from IndexedDB:",
-        event.target.error
-      );
+      console.error("Database error:", event.target.error);
       reject(event.target.error);
+    };
+
+    request.onsuccess = (event) => {
+      const db = event.target.result;
+      const transaction = db.transaction("favorites", "readonly");
+      const store = transaction.objectStore("favorites");
+      const getAllRequest = store.getAll();
+
+      getAllRequest.onerror = (event) => {
+        console.error("Error getting favorite outfits:", event.target.error);
+        reject(event.target.error);
+      };
+
+      getAllRequest.onsuccess = (event) => {
+        const outfits = event.target.result;
+        resolve(outfits);
+      };
     };
   });
 }
-
 export {
   initDB,
   openDB,
