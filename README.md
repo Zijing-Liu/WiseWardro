@@ -15,7 +15,9 @@
    ![upload images](./upload_images.png)
 
 2. Get outfit inspirations
-   ![get outfit ideas analyzing](./recommendations.png)
+
+<img src="./recommendations.png" alt="get outfit ideas desktop view" height="300px" style="inline-block"/>
+<img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="300px" />
 
 ## Installation
 
@@ -51,4 +53,5 @@ External API reference[openai](https://platform.openai.com/docs/guides/vision)
 ## Lessons learned & next steps
 
 - In order to get more accurated result, the prompt needs to be further refined.
-- Currently the app uses IndexDB for client-side image storage, and images are comminicated as formdata between the client and server. Will explore data clould
+- Currently the app uses IndexDB for client-side image storage, and images are comminicated as formdata between the client and server. Will implement cloud data storage for scaling purposes.
+- Implement user profile feature, so we an get more spes of each individual user, using this data to query gpt vison model, therefore to get more personalized fashion suggestions targert to the uesr.
