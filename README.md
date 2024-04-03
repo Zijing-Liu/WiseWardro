@@ -2,29 +2,18 @@
 
 Have you ever stared at your closets, unsure of what to wear or if your outfit even matches your style? And what about mixing old favorites with new additions? It's a puzzle! But fear not, because that's where WiseWardro comes in! Checkout this video below that shows how simple it is to use WiseWardro.
 
-## Demo Video
+## 🎥 Watch the Demo
 
-<div style="text-align: center;">
+<div align=”center” >
      <a href="https://www.youtube.com/watch?v=pKMiv-bPQ00">
-       <img src="https://img.youtube.com/vi/pKMiv-bPQ00/0.jpg" alt="Demo of WiseWardro" width="640" height="360" />
+       <img src="https://img.youtube.com/vi/pKMiv-bPQ00/0.jpg" alt="Demo of WiseWardro" width="640" height="auto" />
      </a>
 </div>
-WiseWardro is an AI fashion advisor powered by the GPT-4 Vision model. Whether you need a second opinion on that new jacket, want to mix and match your favorite jeans with a funky top, or just need some inspiration for your next outfit, WiseWardro has got your back. I will show you how to use WiseWardro in this video.
-
-Imagine having your own personal fashion guru right at your fingertips. With WiseWardor, you can get expert advice on outfit combinations that suit your unique style preferences.
-
-So, whether you need a second opinion on that new jacket, want to mix and match your favorite jeans with a funky top, or just need some inspiration for your next outfit, WiseWardro has got your back.
-
-Just drag and drop your clothing images, choose your style vibe, hit 'Ask Advisor,' and voilà! Our AI-powered fashion genie works its magic and presents you with a gallery of outfit suggestions that are spot-on for you.
-
-You can even save your favorite looks for later and easily access them whenever you need a fashion boost.
-
-Say goodbye to outfit dilemmas and hello to effortless style with WiseWardro. Let's dive in and see how it works!
 
 ## Tech stack
 
 <div align=”center”>
-<img  src="./readme_assets/WiseWardro_architect_bk.png" alt="Project Architecture and Tech Stack" width="400" />
+<img  src="./readme_assets/WiseWardro_architect_bk.png" alt="Project Architecture and Tech Stack" width="400" height="auto"/>
 </div>
 <br>
 
@@ -33,21 +22,13 @@ Say goodbye to outfit dilemmas and hello to effortless style with WiseWardro. Le
 - The server and RESTful api was designed with **Node.js with Express.js**.
 - The main feature of outfit suggestion was powpered by openAI API, GPT-4 vision model.
 
-## Features and/or usage instructions
+## 🔥 Key Features
 
-1. Uploads images with drags and drop, and selected styles before consuliting outfit ideas
-   ![upload images](./readme_assets/upload_images.png)
-
-2. Get outfit inspirations
-   <div style="display: flex; justify-content: space-between">
-     <img  src="./readme_assets/recommendations.png" alt="get outfit ideas desktop view" height="320px" width="auto" style="margin-right: 10px;" />
-     <img src="./readme_assets/recommendations_mobile.png" alt="get outfit ideas mobile view" height="320px"  width="auto" />
-   </div>
-3. Save an outfit as favorites
-   ![save or remove an outfit](./readme_assets/fav_unfav_outfits.png)
-
-4. check all saved outfits
-   ![my favorite outfits](./readme_assets/my-outfits.png)
+- Drag and drop functionality for easy outfit creation.
+- Style selection to customize recommendations.
+- AI-powered advisor for expert fashion guidance.
+- Save and favorite outfits for future reference.
+- Seamless user experience with intuitive design.
 
 ## Installation
 
@@ -73,6 +54,27 @@ Say goodbye to outfit dilemmas and hello to effortless style with WiseWardro. Le
    ```bash
    node index.js
    ```
+
+## How to use WiseWardro
+
+1. Drag and drop images and select style preference
+   ![upload images](./readme_assets/upload_images.png)
+   <br>
+2. Get outfit inspirations
+   <div style="display: flex; justify-content: space-between">
+     <img  src="./readme_assets/recommendations.png" alt="get outfit ideas desktop view" height="320px" width="auto" style="margin-right: 10px;" />
+     <img src="./readme_assets/recommendations_mobile.png" alt="get outfit ideas mobile view" height="320px"  width="auto" />
+   </div>
+<br>
+
+3. Save an outfit as favorites
+   ![save or remove an outfit](./readme_assets/fav_unfav_outfits.png)
+
+<br>
+
+4. check all saved outfits
+   <br>
+   ![my favorite outfits](./readme_assets/my-outfits.png)
 
 ## API references
 
