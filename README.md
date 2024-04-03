@@ -2,8 +2,13 @@
 
 Have you ever stared at your closets, unsure of what to wear or if your outfit even matches your style? And what about mixing old favorites with new additions? It's a puzzle! But fear not, because that's where WiseWardro comes in! Checkout this video below that shows how simple it is to use WiseWardro.
 
-[![Demo of WiseWardro](https://img.youtube.com/vi/pKMiv-bPQ00/0.jpg)](https://www.youtube.com/watch?v=pKMiv-bPQ00)
+## Demo Video
 
+<div style="text-align: center;">
+     <a href="https://www.youtube.com/watch?v=pKMiv-bPQ00">
+       <img src="https://img.youtube.com/vi/pKMiv-bPQ00/0.jpg" alt="Demo of WiseWardro" width="640" height="360" />
+     </a>
+</div>
 WiseWardro is an AI fashion advisor powered by the GPT-4 Vision model. Whether you need a second opinion on that new jacket, want to mix and match your favorite jeans with a funky top, or just need some inspiration for your next outfit, WiseWardro has got your back. I will show you how to use WiseWardro in this video.
 
 Imagine having your own personal fashion guru right at your fingertips. With WiseWardor, you can get expert advice on outfit combinations that suit your unique style preferences.
@@ -21,9 +26,11 @@ Say goodbye to outfit dilemmas and hello to effortless style with WiseWardro. Le
 - The project used **React.js, JavaScript, CSS, SASS** for the front-end development.
 - For data persistence, we used **IndexDB** to store images and outfit combinations in the client side.
 - The server and RESTful api was designed with **Node.js with Express.js**.
-- The main feature of outfit suggestion was powpered by openAI gpt4 vision API.
+- The main feature of outfit suggestion was powpered by openAI API, GPT-4 vision model.
 
-![Project Architecture and Tech Stack](./readme_assets/WiseWardro_architect_bk.png)
+<div style="text-align: center;">
+  <img src="./readme_assets/WiseWardro_architect_bk.png" alt="Project Architecture and Tech Stack" width="500" style="margin: 0 auto;" />
+</div>
 
 ## Features and/or usage instructions
 
