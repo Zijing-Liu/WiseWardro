@@ -1,6 +1,20 @@
 # WiseWardro
 
-![Homepage](./readme_assets/homepage.png)
+Have you ever stared at your closets, unsure of what to wear or if your outfit even matches your style? And what about mixing old favorites with new additions? It's a puzzle! But fear not, because that's where WiseWardro comes in! Take a look at the video that shows how simple it is to use WiseWardro.
+
+[![Demo of WiseWardro](./readme_assets/homepage.png)](https://youtu.be/pKMiv-bPQ00)
+
+WiseWardro is an AI fashion advisor powered by the GPT-4 Vision model. Whether you need a second opinion on that new jacket, want to mix and match your favorite jeans with a funky top, or just need some inspiration for your next outfit, WiseWardro has got your back. I will show you how to use WiseWardro in this video.
+
+Imagine having your own personal fashion guru right at your fingertips. With WiseWardor, you can get expert advice on outfit combinations that suit your unique style preferences.
+
+So, whether you need a second opinion on that new jacket, want to mix and match your favorite jeans with a funky top, or just need some inspiration for your next outfit, WiseWardro has got your back.
+
+Just drag and drop your clothing images, choose your style vibe, hit 'Ask Advisor,' and voilà! Our AI-powered fashion genie works its magic and presents you with a gallery of outfit suggestions that are spot-on for you.
+
+You can even save your favorite looks for later and easily access them whenever you need a fashion boost.
+
+Say goodbye to outfit dilemmas and hello to effortless style with WiseWardro. Let's dive in and see how it works!
 
 ## Tech stack
 
@@ -60,6 +74,6 @@ External API reference[openai](https://platform.openai.com/docs/guides/vision)
 
 ## Lessons learned & next steps
 
-- In order to get more accurated result, the prompt needs to be further refined.
-- Currently the app uses IndexDB for client-side image storage, and images are comminicated as formdata between the client and server. Will implement cloud data storage for scaling purposes.
-- Implement user profile feature, so we an get more spes of each individual user, using this data to query gpt vison model, therefore to get more personalized fashion suggestions targert to the uesr.
+- In order to get more accurate result, the prompt needs to be further refined.
+- Currently the app uses IndexDB for client-side image storage, and images are communicate as form data between the client and server. Will implement cloud data storage for scaling purposes.
+- Implement user profile feature, so we an get more specifics of each individual user, using this data to query gpt vision model, therefore to get more personalized fashion suggestions target to the user.
