@@ -23,14 +23,15 @@ Say goodbye to outfit dilemmas and hello to effortless style with WiseWardro. Le
 
 ## Tech stack
 
+<div align=”center”>
+<img  src="./readme_assets/WiseWardro_architect_bk.png" alt="Project Architecture and Tech Stack" width="400" />
+</div>
+<br>
+
 - The project used **React.js, JavaScript, CSS, SASS** for the front-end development.
 - For data persistence, we used **IndexDB** to store images and outfit combinations in the client side.
 - The server and RESTful api was designed with **Node.js with Express.js**.
 - The main feature of outfit suggestion was powpered by openAI API, GPT-4 vision model.
-
-<div style="text-align: center;">
-  <img src="./readme_assets/WiseWardro_architect_bk.png" alt="Project Architecture and Tech Stack" width="500" style="margin: 0 auto;" />
-</div>
 
 ## Features and/or usage instructions
 
