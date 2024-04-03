@@ -1,8 +1,8 @@
 # WiseWardro
 
-Have you ever stared at your closets, unsure of what to wear or if your outfit even matches your style? And what about mixing old favorites with new additions? It's a puzzle! But fear not, because that's where WiseWardro comes in! Take a look at the video that shows how simple it is to use WiseWardro.
+Have you ever stared at your closets, unsure of what to wear or if your outfit even matches your style? And what about mixing old favorites with new additions? It's a puzzle! But fear not, because that's where WiseWardro comes in! Checkout this video below that shows how simple it is to use WiseWardro.
 
-[![Demo of WiseWardro](./readme_assets/homepage.png)](https://youtu.be/pKMiv-bPQ00)
+[![Demo of WiseWardro](https://img.youtube.com/vi/pKMiv-bPQ00/0.jpg)](https://www.youtube.com/watch?v=pKMiv-bPQ00)
 
 WiseWardro is an AI fashion advisor powered by the GPT-4 Vision model. Whether you need a second opinion on that new jacket, want to mix and match your favorite jeans with a funky top, or just need some inspiration for your next outfit, WiseWardro has got your back. I will show you how to use WiseWardro in this video.
 
