@@ -1,6 +1,6 @@
 # WiseWardro
 
-![Homepage](./homepage.png)
+![Homepage](./readme_assets/homepage.png)
 
 ## Tech stack
 
@@ -9,21 +9,23 @@
 - The server and RESTful api was designed with **Node.js with Express.js**.
 - The main feature of outfit suggestion was powpered by openAI gpt4 vision API.
 
+![Project Architecture and Tech Stack](./readme_assets/WiseWardro_architect_bk.png)
+
 ## Features and/or usage instructions
 
 1. Uploads images with drags and drop, and selected styles before consuliting outfit ideas
-   ![upload images](./upload_images.png)
+   ![upload images](./readme_assets/upload_images.png)
 
 2. Get outfit inspirations
    <div style="display: flex; justify-content: space-between">
-     <img  src="./recommendations.png" alt="get outfit ideas desktop view" height="320px" width="auto" style="margin-right: 10px;" />
-     <img src="./recommendations_mobile.png" alt="get outfit ideas mobile view" height="320px"  width="auto" />
+     <img  src="./readme_assets/recommendations.png" alt="get outfit ideas desktop view" height="320px" width="auto" style="margin-right: 10px;" />
+     <img src="./readme_assets/recommendations_mobile.png" alt="get outfit ideas mobile view" height="320px"  width="auto" />
    </div>
 3. Save an outfit as favorites
-   ![save or remove an outfit](./fav_unfav_outfits.png)
+   ![save or remove an outfit](./readme_assets/fav_unfav_outfits.png)
 
 4. check all saved outfits
-   ![my favorite outfits](./my-outfits.png)
+   ![my favorite outfits](./readme_assets/my-outfits.png)
 
 ## Installation
 
