@@ -5,7 +5,7 @@ Have you ever stared at your closets, unsure of what to wear or if your outfit e
 ## 🎥 Watch the Demo
 
 <div align=”center” >
-     <a href="https://www.youtube.com/watch?v=pKMiv-bPQ00">
+     <a href="https://www.youtube.com/watch?v=rqq_e4WpxgU">
        <img src="https://img.youtube.com/vi/pKMiv-bPQ00/0.jpg" alt="Demo of WiseWardro" width="640" height="auto" />
      </a>
 </div>
